@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<!-- diagram-personal: レイアウト見本のマスター（SSoT）。ブラウザ確認用の公開 URL 文字列は references/exemplar.md の「黄金見本」表のみ正とする。マークアップの更新はこのファイル（＋同階層 images/）のみ。デプロイや output 配下へ反映するときはここからコピーする。内容は AI Lift Consulting 競合1件図解の見本と同型。 -->
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Lift Consulting の事業モデル — パーソナル図解</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --personal-accent: hsl(258, 45%, 40%);
+      --personal-accent-light: hsl(270, 50%, 97%);
+      --learner-border: #423773;
+      --learner-bubble-a: #faf8ff;
+      --learner-bubble-b: #e8e0ff;
+      --learner-avatar-bg: #f3f0ff;
+      --nav-border: #a86f6f;
+      --nav-bubble-a: #fff9f8;
+      --nav-bubble-b: #fde8e3;
+      --nav-avatar-bg: #fef2f2;
+    }
+    body { font-family: 'Noto Sans JP', system-ui, sans-serif; }
+
+    .header-gradient {
+      background: linear-gradient(125deg, #3730a3 0%, #5b3d5c 48%, #8b5a6a 100%);
+    }
+
+    .section-card {
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .term-explain {
+      background: linear-gradient(135deg, var(--personal-accent-light) 0%, hsl(270, 40%, 99%) 100%);
+      border-left: 4px solid var(--personal-accent);
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      margin: 1.5rem 0;
+    }
+    .term-word { color: var(--personal-accent); }
+
+    .char-bubble {
+      position: relative;
+      padding: 1.25rem 1.5rem;
+      border-radius: 1rem;
+      margin-left: 0.5rem;
+    }
+    .char-bubble::before {
+      content: '';
+      position: absolute;
+      left: -10px;
+      top: 18px;
+      border-width: 10px;
+      border-style: solid;
+    }
+    .learner-bubble {
+      background: linear-gradient(135deg, var(--learner-bubble-a) 0%, var(--learner-bubble-b) 100%);
+      border: 2px solid var(--learner-border);
+    }
+    .learner-bubble::before {
+      border-color: transparent var(--learner-border) transparent transparent;
+    }
+    .guide-bubble {
+      background: linear-gradient(135deg, var(--nav-bubble-a) 0%, var(--nav-bubble-b) 100%);
+      border: 2px solid var(--nav-border);
+    }
+    .guide-bubble::before {
+      border-color: transparent var(--nav-border) transparent transparent;
+    }
+
+    .learner-avatar {
+      border: 2px solid var(--learner-border);
+      background: var(--learner-avatar-bg);
+    }
+    .navigator-avatar {
+      border: 2px solid var(--nav-border);
+      background: var(--nav-avatar-bg);
+    }
+
+    .label-learner { color: #2e285a; }
+    .label-navigator { color: #5c3030; }
+
+    .badge-essential {
+      background: linear-gradient(135deg, #b91c1c 0%, #ef4444 100%);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    .badge-recommended {
+      background: linear-gradient(135deg, #5b4d8c 0%, #8b6b8e 100%);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    .badge-optional {
+      background: linear-gradient(135deg, #6b7280 0%, #9ca3af 100%);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .toc {
+      position: fixed;
+      left: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: white;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      max-height: 80vh;
+      overflow-y: auto;
+      z-index: 50;
+    }
+    @media (max-width: 1280px) {
+      .toc { display: none; }
+    }
+  </style>
+</head>
+<body class="bg-violet-50">
+  <header class="header-gradient text-white py-8">
+    <div class="max-w-4xl mx-auto px-4">
+      <h1 class="text-3xl md:text-4xl font-bold">AI Lift Consulting の事業モデル</h1>
+      <p class="mt-2 text-lg opacity-90">誰に・何を・いくらで届けているかを一枚に圧縮（公開情報ベース）</p>
+      <p class="mt-3 text-sm opacity-85 max-w-3xl">今回は<strong>AI Lift Consulting</strong>を選びました（観点：<strong>個人事業主向けの「ライト顧問」と税込の月額が公式に並んでいる</strong>ため、棚と値札が読み取りやすい）。</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-8">
+
+    <section class="section-card" id="section-dialogue-intro">
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AIまいごん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">AIまいごん:</span><br>
+            競合調査の文章、長すぎて頭から抜けます。結局このサービスは<strong>誰に・何を・いくらで</strong>やってるのか、まず一言でいいので教えてください。
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 mb-2">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AI博士ウパ">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">AI博士ウパ:</span><br>
+            今回は<strong>AI Lift Consulting</strong>です。サイト上の運営は<strong>イオリツ行政書士事務所</strong>と書かれています。いまは<strong>商店街の地図</strong>を一緒に見るイメージで、<strong>客層・商品の中身・値札</strong>の<strong>3つだけ</strong>で大丈夫です。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="section-map">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="map" class="w-8 h-8 text-violet-600"></i>
+        全体の地図（この競合の3つの側面）
+      </h2>
+      <p class="text-slate-600 mb-6">公式は「<strong>ChatGPTをちょっと試したけど続かない経営者</strong>」向けの<strong>伴走</strong>と、<strong>中小企業のためのAI活用支援</strong>を前面に出しています。ここでは読みやすいように3つに分けました。</p>
+
+      <div class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-xl border-2 border-violet-200 bg-violet-50 p-4 md:col-span-2">
+          <p class="font-bold text-violet-900 flex items-center gap-2"><i data-lucide="users" class="w-6 h-6"></i> ① 誰に届けているか（ターゲット）</p>
+          <p class="text-sm text-slate-600 mt-2"><strong>中小企業の経営者</strong>を軸に語りつつ、料金のところで<strong>「ライト顧問プラン（個人事業主・小さな会社向け）」</strong>と明記されています（「小規模法人」は、従業員がごく少ない会社のイメージで読めます）。「ChatGPTを試したが続かない」という悩みを持つ人、という文脈です。</p>
+        </div>
+        <div class="rounded-xl border-2 border-rose-200 bg-rose-50 p-4 md:col-span-2">
+          <p class="font-bold text-rose-900 flex items-center gap-2"><i data-lucide="package" class="w-6 h-6"></i> ② 何をどう届けているか（サービス・届け方）</p>
+          <p class="text-sm text-slate-600 mt-2"><strong>経営の迷いを整理する相談AI</strong>、<strong>マニュアルを読み込ませた業務の質問窓口</strong>、<strong>月1回の打ち合わせ</strong>、<strong>毎月の情報まとめ</strong>が、セットの芯です。</p>
+          <p class="text-sm text-slate-500 mt-2">上の「ベーシック」プランでは、社内研修や、契約・補助金まわりの話（手続の代行は別見積）も載っています。細部は公式で。</p>
+        </div>
+        <div class="rounded-xl border-2 border-slate-300 bg-slate-50 p-4 md:col-span-2">
+          <p class="font-bold text-slate-900 flex items-center gap-2"><i data-lucide="circle-dollar-sign" class="w-6 h-6"></i> ③ いくらでどう立っているか（価格・立ち位置）</p>
+          <p class="text-sm text-slate-600 mt-2"><strong>ライト顧問プラン：月額11,000円（税込）</strong>、<strong>ベーシック顧問プラン：月額33,000円（税込）</strong>と、公式本文に並んでいます。いずれも<strong>月々の会費型</strong>で、伴走とツールを<strong>ひとまとめの商品</strong>として出している立ち位置です。</p>
+        </div>
+      </div>
+      <p class="text-slate-600 text-sm mt-4">たとえ話にすると、<strong>どの客層のどの棚に商品を並べているか（①）、お弁当の中身と届け方（②）、値札と店の看板（③）</strong>、と覚えると頭が空きません。</p>
+    </section>
+
+    <section class="section-card" id="section-terms">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="lightbulb" class="w-8 h-8 text-violet-600"></i>
+        先に押さえる用語
+      </h2>
+
+      <div class="term-explain">
+        <div class="flex items-start gap-4">
+          <i data-lucide="lightbulb" class="w-8 h-8 text-violet-600 flex-shrink-0"></i>
+          <div>
+            <div class="term-word text-xl font-bold">「AI顧問」って、ここでは何を指す？</div>
+            <div class="term-meaning text-lg mt-2">
+              契約の期間中、<span class="font-bold text-violet-700">相談に乗りながらAIの使い方や業務の直し方を一緒に決めていく</span>スタイルの呼び方です。税理士に毎月様子を見てもらうイメージに近いです（<strong>あくまでたとえ話</strong>で、仕事の中身は別物です）。<br>
+              この図解では<strong>「月ごとの相談役」</strong>と呼びます。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="term-explain">
+        <div class="flex items-start gap-4">
+          <i data-lucide="lightbulb" class="w-8 h-8 text-violet-600 flex-shrink-0"></i>
+          <div>
+            <div class="term-word text-xl font-bold">「伴走型」とは？</div>
+            <div class="term-meaning text-lg mt-2">
+              マニュアルだけ渡して終わりではなく、<span class="font-bold text-violet-700">しばらく一緒に歩きながら習慣化まで手を貸す</span>ことです。教室の個別指導に近いです。<br>
+              この図解では<strong>「横について歩くサポート」</strong>と呼びます。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="term-explain">
+        <div class="flex items-start gap-4">
+          <i data-lucide="lightbulb" class="w-8 h-8 text-violet-600 flex-shrink-0"></i>
+          <div>
+            <div class="term-word text-xl font-bold">「サブスク」とは？</div>
+            <div class="term-meaning text-lg mt-2">
+              毎月（または毎年）決まったお金を払い続ける課金の形です。ジムの月会費や動画サービスと同じです。<br>
+              この図解では<strong>「月々の会費型」</strong>と呼びます。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="term-explain">
+        <div class="flex items-start gap-4">
+          <i data-lucide="lightbulb" class="w-8 h-8 text-violet-600 flex-shrink-0"></i>
+          <div>
+            <div class="term-word text-xl font-bold">サイトの「MyAI」と「カスタムGPT」とは？</div>
+            <div class="term-meaning text-lg mt-2">
+              公式の商品名です。<strong>MyAI</strong>は、<span class="font-bold text-violet-700">経営の判断や迷いを言葉にし、次の一手を一緒に考えるための「社長専用の相談相手」</span>のイメージです。<strong>カスタムGPT</strong>は、<span class="font-bold text-violet-700">マニュアルやFAQを読み込ませて、現場が迷わないよう答え返す「社内専用の質問窓口」</span>のイメージです。<br>
+              この図解では、それぞれ<strong>「社長用の相談AI」</strong>と<strong>「業務用の質問窓口」</strong>と呼びます。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="term-explain">
+        <div class="flex items-start gap-4">
+          <i data-lucide="lightbulb" class="w-8 h-8 text-violet-600 flex-shrink-0"></i>
+          <div>
+            <div class="term-word text-xl font-bold">「行政書士」とは？</div>
+            <div class="term-meaning text-lg mt-2">
+              許認可や契約書など、<span class="font-bold text-violet-700">法律に関する書類や手続きを専門に扱える国家資格</span>のことです。お店の開業届や補助金の書類のイメージに近いです。<br>
+              この図解では<strong>「法務まわりの書類のプロ」</strong>と呼びます。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="section-three">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="check-circle" class="w-8 h-8 text-violet-600"></i>
+        この競合でまず押さえる3つ
+      </h2>
+      <p class="text-slate-600 mb-6">細部より、<strong>一言で言える核</strong>に絞りました。各行に <strong>ターゲット／提供・届け方／価格・立ち位置</strong> と、<strong>自分の事業との関係（勝ち筋の材料）</strong> を入れます。</p>
+
+      <div class="space-y-4">
+        <div class="rounded-xl border border-slate-200 p-4 flex flex-col sm:flex-row sm:items-start gap-3">
+          <span class="badge-essential flex-shrink-0">必須</span>
+          <div>
+            <p class="font-bold text-slate-800">ターゲット：中小の経営者＋「ライト」で個人事業主・小規模法人を明記</p>
+            <p class="text-slate-600 mt-1"><strong>要点：</strong>法人だけでなく、<strong>一人社長や小さな法人</strong>の棚が公式に見える。<strong>自分との関係：</strong>同じ個人事業主層を取りに行くなら、<strong>何を「月1万円台」で渡すか</strong>の比較軸がはっきりする。</p>
+          </div>
+        </div>
+        <div class="rounded-xl border border-slate-200 p-4 flex flex-col sm:flex-row sm:items-start gap-3">
+          <span class="badge-recommended flex-shrink-0">推奨</span>
+          <div>
+            <p class="font-bold text-slate-800">届け方：社長用の相談AI・業務用の質問窓口・月1回の打ち合わせ・毎月の情報まとめ</p>
+            <p class="text-slate-600 mt-1"><strong>要点：</strong><strong>ツールふたつ＋月次の顔合わせ</strong>が商品の芯。ベーシックでは研修や法務サポートも。<strong>自分との関係：</strong>伴走でも<strong>「業務フローにどこまで入り込むか」</strong>で差がつく材料。</p>
+          </div>
+        </div>
+        <div class="rounded-xl border border-slate-200 p-4 flex flex-col sm:flex-row sm:items-start gap-3">
+          <span class="badge-optional flex-shrink-0">任意</span>
+          <div>
+            <p class="font-bold text-slate-800">価格・立ち位置：税込で月1.1万／3.3万の月々の会費型（公式本文）</p>
+            <p class="text-slate-600 mt-1"><strong>要点：</strong>いわゆる高額な法人向け顧問より、<strong>手の届く月会費</strong>で「顧問」を売る立ち位置。<strong>自分との関係：</strong>あなたが想定する<strong>数ヶ月・15〜30万円のまとまった契約</strong>とは<strong>課金の単位が違う</strong>ので、<strong>どこで勝つか</strong>を言い切りやすい。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="section-profile">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="building-2" class="w-8 h-8 text-violet-600"></i>
+        プロフィールと強み
+      </h2>
+
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AIまいごん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">AIまいごん:</span><br>
+            ブランド名と事務所名と担当者名が出てきて、<strong>どれが表札でどれが人名か、頭の中がごちゃっとします</strong>……ここだけ短く整理してもいいですか？
+          </p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4 mb-6">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AI博士ウパ">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">AI博士ウパ:</span><br>
+            もちろんです。ここからは<strong>誰が前面に出ているか</strong>と<strong>強みの言い方</strong>だけ、短くいきます。
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AIまいごん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">AIまいごん:</span><br>
+            強みって、肩書きと実績の出し方で決まりますか？　このサービスだと何が目に入りますか？
+          </p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4 mb-6">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AI博士ウパ">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">AI博士ウパ:</span><br>
+            多くの場合、<strong>資格（法務まわりの書類のプロ）</strong>と<strong>現場の業務改善・システム導入の経験</strong>を一緒に出せるかが目に入ります。事例では、思考の整理から補助金の話まで<strong>一気通貫で書かれている</strong>のが印象です。
+          </p>
+        </div>
+      </div>
+
+      <ul class="list-disc pl-6 text-slate-600 space-y-2 mb-4">
+        <li><strong>ブランド</strong>：AI Lift Consulting（フッター等では Copyright 表記が<strong>イオリツ行政書士事務所</strong>）。</li>
+        <li><strong>担当の紹介（公式）</strong>：生成AIアドバイザー／行政書士・同事務所代表の<strong>佐久間彩子</strong>。元IT系のプロジェクトマネージャーとして業務改善やシステム導入をしてきた、とあります。</li>
+        <li><strong>打ち出し</strong>：経営の「考える力」と業務の「効率化の仕組み」の両方、という語りと、<strong>社長用の相談AI</strong>と<strong>業務用の質問窓口</strong>の二本柱です。</li>
+        <li><strong>補足</strong>：FAQでは、条件が合えば補助金の申請支援も可能（別見積）、とあります。</li>
+      </ul>
+      <p class="text-xs text-slate-500">参考: <a href="https://ailiftconsulting.com/" class="text-violet-700 hover:underline" target="_blank" rel="noopener noreferrer">AI Lift Consulting（公式）</a></p>
+    </section>
+
+    <section class="section-card" id="section-offer">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="layout-list" class="w-8 h-8 text-violet-600"></i>
+        商品と価格
+      </h2>
+
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AIまいごん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">AIまいごん:</span><br>
+            料金、税込か税抜かで迷子になります。図解ではどう統一しますか？
+          </p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4 mb-6">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AI博士ウパ">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">AI博士ウパ:</span><br>
+            公式の料金は<strong>税込</strong>と書いてあるので、このセクションは<strong>税込に合わせます</strong>。レシートの感覚で「お支払いの総額」だと思ってください。
+          </p>
+        </div>
+      </div>
+
+      <div class="rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700 space-y-3 mb-4">
+        <p><strong>料金（公式ページの要約・税込）</strong>：導入は<strong>無料相談</strong>から。最低契約期間の有無は、重要な判断の前に<strong>公式の最新表示</strong>で確認してください。</p>
+        <p class="text-slate-600 text-sm">下の名前は<strong>公式のプラン名</strong>です。中身は右列の短いメモだけ追えば大丈夫です。</p>
+        <div class="overflow-x-auto">
+          <table class="min-w-full text-left border-collapse text-sm">
+            <thead>
+              <tr class="border-b border-slate-300">
+                <th class="py-2 pr-4">プラン</th>
+                <th class="py-2 pr-4">月額（税込）</th>
+                <th class="py-2">含まれるもの（要約）</th>
+              </tr>
+            </thead>
+            <tbody class="text-slate-600">
+              <tr class="border-b border-slate-200">
+                <td class="py-2 pr-4 font-medium text-slate-800">ライト顧問（個人事業主・小規模法人向け）</td>
+                <td class="py-2 pr-4">11,000円</td>
+                <td class="py-2">社長用の相談AI・業務用の質問窓口・月1回ミーティング・毎月の情報まとめ</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 font-medium text-slate-800">ベーシック顧問（法人向け）</td>
+                <td class="py-2 pr-4">33,000円</td>
+                <td class="py-2">上記に加え、社内展開（研修等）・契約書や補助金など法務面のサポート（手続代行は別見積）</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>一言メモ</strong>：同じ「月額」でも、<strong>法人向けの方が社内研修や法務の幅が広い</strong>と読めます。比較の軸にすると迷いにくいです。</p>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-2 md:gap-4 text-sm text-slate-700 mb-4">
+        <span class="rounded-lg border border-violet-200 bg-white px-3 py-2">月々の会費（税込）</span>
+        <i data-lucide="arrow-right" class="w-5 h-5 text-violet-500 hidden sm:block"></i>
+        <span class="rounded-lg border border-violet-200 bg-white px-3 py-2">社長用の相談AI＋業務用の質問窓口</span>
+        <i data-lucide="arrow-right" class="w-5 h-5 text-violet-500 hidden sm:block"></i>
+        <span class="rounded-lg border border-violet-200 bg-white px-3 py-2">月1回の打ち合わせ</span>
+      </div>
+
+      <p class="text-xs text-slate-500">参考: <a href="https://ailiftconsulting.com/" class="text-violet-700 hover:underline" target="_blank" rel="noopener noreferrer">料金・サービス（公式）</a></p>
+    </section>
+
+    <section class="section-card" id="section-win">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="target" class="w-8 h-8 text-violet-600"></i>
+        あなたとの比較と勝ち筋
+      </h2>
+
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AIまいごん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">AIまいごん:</span><br>
+            競合が強そうだと、逆に動けなくなるんですが……。
+          </p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4 mb-6">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AI博士ウパ">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">AI博士ウパ:</span><br>
+            図解のゴールは「勝ち筋が<strong>1行で言える</strong>」ことです。全部に勝つ必要はなく、<strong>同じお客様でも入口と続き方で棲み分けできるか</strong>を書けば十分です。
+          </p>
+        </div>
+      </div>
+
+      <ul class="list-disc pl-6 text-slate-600 space-y-2 mb-4">
+        <li><strong>重なる点</strong>：生成AIを<strong>経営や業務の横で使う</strong>話、<strong>月ごとの相談役</strong>、マニュアルをAIに読ませる発想は、あなたの<strong>講師→顧問</strong>の延長と<strong>骨格が似る</strong>部分があります。</li>
+        <li><strong>ずれる点</strong>：相手は<strong>月々の会費型</strong>で、商品の中心は<strong>社長用の相談AI・業務用の質問窓口・月1回</strong>のパッケージ。あなたが想定している<strong>数ヶ月にまとめた契約</strong>や、<strong>業務フロー全体への組み込み・個別ツールづくり</strong>を前面に出すなら、<strong>売り方の単位が違う</strong>と言い切れます。</li>
+        <li><strong>どこで勝つか（仮説の例）</strong>：<strong>セミナー中心ではなく、実際の仕事の流れに入り込み、数ヶ月で「動く形」まで持っていく</strong>。月会費の「ツール＋月1」より、<strong>深い実装と短期の成果の物差し</strong>を売る、という置き方がしやすいです。</li>
+      </ul>
+
+      <p class="rounded-lg border-2 border-violet-300 bg-violet-50 p-4 text-slate-800 font-medium mb-4">
+        <span class="text-violet-900 font-bold">このページの一行（どこで勝つか）：</span>
+        相手が<strong>「税込月1.1万〜の月々の会費で、社長用の相談AIと業務用の質問窓口を渡す伴走」</strong>なら、自分は<strong>「数ヶ月・まとまった料金で、業務の流れごと組み替えて、必要なら小さな自動化まで作る」</strong>と言い切れる。
+      </p>
+
+      <details class="rounded-lg border border-slate-200 bg-white p-4 mb-4">
+        <summary class="font-bold text-slate-800 cursor-pointer">もう少しだけ：検討メモ（任意）</summary>
+        <p class="text-slate-600 mt-3 text-sm">次の「開始」では、<strong>月額を前面に出さず「◯ヶ月一括」のプロジェクト型</strong>をうたう別主体と並べると、課金の地図がさらに整理しやすいかもしれません。</p>
+      </details>
+
+      <p class="text-xs text-slate-500">※ 価格・条件は変更されうるため、契約や比較の最終判断は必ず各社の最新の公式表示で確認してください。</p>
+    </section>
+
+    <section class="section-card" id="section-summary">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="book-open" class="w-8 h-8 text-violet-600"></i>
+        まとめ
+      </h2>
+
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AIまいごん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">AIまいごん:</span><br>
+            なるほど。<strong>AI Lift Consultingは、税込で月1.1万〜3.3万の月々の会費で、社長用の相談AIと業務用の質問窓口・月1回の伴走をセットで売っている</strong>、と理解しました。<br>
+            私の勝ち筋は<strong>「月会費のツールセットではなく、数ヶ月かけた業務の組み替えと、必要なら道具づくり」</strong>、と言い切ってよさそうです。つまり、そういう理解で合ってますか？
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AI博士ウパ">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">AI博士ウパ:</span><br>
+            はい、その整理で十分です。競合が変わっても、<strong>「誰・何・いくら・勝ち筋」</strong>に戻せば迷いにくいです。今日覚えるのはここまででよい、と割り切って大丈夫です。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="section-sources">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="link" class="w-8 h-8 text-violet-600"></i>
+        出典一覧（確認用）
+      </h2>
+      <ul class="list-disc pl-6 text-slate-600 space-y-2 text-sm">
+        <li><a href="https://ailiftconsulting.com/" class="text-violet-700 hover:underline" target="_blank" rel="noopener noreferrer">AI Lift Consulting（公式）</a></li>
+        <li><a href="https://office-iolite.com/entry26.html" class="text-violet-700 hover:underline" target="_blank" rel="noopener noreferrer">プライバシーポリシー（イオリツ行政書士事務所・公式）</a></li>
+        <li>料金・提供内容・契約条件は、掲載時点の公式表示に基づく。更新・改定がありうる。</li>
+      </ul>
+      <p class="text-xs text-slate-500 mt-4">このページは学習・整理用です。価格・契約条件は必ず各社の最新の公式表示で確認してください。第三者の評価記事は本図解では主に用いていません。</p>
+    </section>
+
+  </main>
+
+  <nav class="toc" aria-label="このページの目次">
+    <p class="text-sm font-bold text-slate-700 mb-2">目次</p>
+    <ul class="text-sm space-y-1 list-none m-0 p-0">
+      <li><a href="#section-dialogue-intro" class="text-violet-700 hover:underline">導入</a></li>
+      <li><a href="#section-map" class="text-violet-700 hover:underline">全体の地図</a></li>
+      <li><a href="#section-terms" class="text-violet-700 hover:underline">用語</a></li>
+      <li><a href="#section-three" class="text-violet-700 hover:underline">この競合でまず押さえる3つ</a></li>
+      <li><a href="#section-profile" class="text-violet-700 hover:underline">プロフィールと強み</a></li>
+      <li><a href="#section-offer" class="text-violet-700 hover:underline">商品と価格</a></li>
+      <li><a href="#section-win" class="text-violet-700 hover:underline">比較と勝ち筋</a></li>
+      <li><a href="#section-summary" class="text-violet-700 hover:underline">まとめ</a></li>
+      <li><a href="#section-sources" class="text-violet-700 hover:underline">出典</a></li>
+    </ul>
+  </nav>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

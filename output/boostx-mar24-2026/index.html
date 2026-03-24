@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<!-- diagram-personal: 株式会社BoostX「生成AI伴走顧問」競合1件図解 -->
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>株式会社BoostX「生成AI伴走顧問」の事業モデル — パーソナル図解</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --personal-accent: hsl(258, 45%, 40%);
+      --personal-accent-light: hsl(270, 50%, 97%);
+      --learner-border: #423773;
+      --learner-bubble-a: #faf8ff;
+      --learner-bubble-b: #e8e0ff;
+      --learner-avatar-bg: #f3f0ff;
+      --nav-border: #a86f6f;
+      --nav-bubble-a: #fff9f8;
+      --nav-bubble-b: #fde8e3;
+      --nav-avatar-bg: #fef2f2;
+    }
+    body { font-family: 'Noto Sans JP', system-ui, sans-serif; }
+
+    .header-gradient {
+      background: linear-gradient(125deg, #3730a3 0%, #5b3d5c 48%, #8b5a6a 100%);
+    }
+
+    .section-card {
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .term-explain {
+      background: linear-gradient(135deg, var(--personal-accent-light) 0%, hsl(270, 40%, 99%) 100%);
+      border-left: 4px solid var(--personal-accent);
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      margin: 1.5rem 0;
+    }
+    .term-word { color: var(--personal-accent); }
+
+    .char-bubble {
+      position: relative;
+      padding: 1.25rem 1.5rem;
+      border-radius: 1rem;
+      margin-left: 0.5rem;
+    }
+    .char-bubble::before {
+      content: '';
+      position: absolute;
+      left: -10px;
+      top: 18px;
+      border-width: 10px;
+      border-style: solid;
+    }
+    .learner-bubble {
+      background: linear-gradient(135deg, var(--learner-bubble-a) 0%, var(--learner-bubble-b) 100%);
+      border: 2px solid var(--learner-border);
+    }
+    .learner-bubble::before {
+      border-color: transparent var(--learner-border) transparent transparent;
+    }
+    .guide-bubble {
+      background: linear-gradient(135deg, var(--nav-bubble-a) 0%, var(--nav-bubble-b) 100%);
+      border: 2px solid var(--nav-border);
+    }
+    .guide-bubble::before {
+      border-color: transparent var(--nav-border) transparent transparent;
+    }
+
+    .learner-avatar {
+      border: 2px solid var(--learner-border);
+      background: var(--learner-avatar-bg);
+    }
+    .navigator-avatar {
+      border: 2px solid var(--nav-border);
+      background: var(--nav-avatar-bg);
+    }
+
+    .label-learner { color: #2e285a; }
+    .label-navigator { color: #5c3030; }
+
+    .badge-essential {
+      background: linear-gradient(135deg, #b91c1c 0%, #ef4444 100%);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    .badge-recommended {
+      background: linear-gradient(135deg, #5b4d8c 0%, #8b6b8e 100%);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    .badge-optional {
+      background: linear-gradient(135deg, #6b7280 0%, #9ca3af 100%);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .toc {
+      position: fixed;
+      left: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: white;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      max-height: 80vh;
+      overflow-y: auto;
+      z-index: 50;
+    }
+    @media (max-width: 1280px) {
+      .toc { display: none; }
+    }
+  </style>
+</head>
+<body class="bg-violet-50">
+  <header class="header-gradient text-white py-8">
+    <div class="max-w-4xl mx-auto px-4">
+      <h1 class="text-3xl md:text-4xl font-bold">株式会社BoostX「生成AI伴走顧問」の事業モデル</h1>
+      <p class="mt-2 text-lg opacity-90">誰に・何を・いくらで届けているかを一枚に圧縮（公開情報ベース）</p>
+      <p class="mt-3 text-sm opacity-85 max-w-3xl">今回は<strong>株式会社BoostX</strong>を選びました（観点：<strong>公式で税込の月額・打ち合わせの回数・最低契約の月数まで一次情報で追いやすい</strong>ため）。</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-8">
+
+    <section class="section-card" id="section-dialogue-intro">
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AIまいごん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">AIまいごん:</span><br>
+            競合調査の文章、長すぎて頭から抜けます。結局このサービスは<strong>誰に・何を・いくらで</strong>やってるのか、まず一言でいいので教えてください。
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 mb-2">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AI博士ウパ">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">AI博士ウパ:</span><br>
+            今回は<strong>株式会社BoostX</strong>の<strong>生成AI伴走顧問</strong>です。いまは<strong>商店街の地図</strong>を一緒に見るイメージで、<strong>客層・商品の中身・値札</strong>の<strong>3つだけ</strong>で大丈夫です。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="section-map">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="map" class="w-8 h-8 text-violet-600"></i>
+        全体の地図（この競合の3つの側面）
+      </h2>
+      <p class="text-slate-600 mb-6">公式は「<strong>社内にAIが分かる人がいない中小企業</strong>」に対して、<strong>顧問契約で専任のAI人材の代わり</strong>を置く、という立ち位置です。読みやすいように3つに分けました。</p>
+
+      <div class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-xl border-2 border-violet-200 bg-violet-50 p-4 md:col-span-2">
+          <p class="font-bold text-violet-900 flex items-center gap-2"><i data-lucide="users" class="w-6 h-6"></i> ① 誰に届けているか（ターゲット）</p>
+          <p class="text-sm text-slate-600 mt-2"><strong>中小企業</strong>を軸に語り、FAQでは<strong>従業員が数名の会社</strong>にも対応すると明記されています。「人手不足」「定型業務」「導入しても現場に定着しない」といった悩みの棚に寄せています。</p>
+        </div>
+        <div class="rounded-xl border-2 border-rose-200 bg-rose-50 p-4 md:col-span-2">
+          <p class="font-bold text-rose-900 flex items-center gap-2"><i data-lucide="package" class="w-6 h-6"></i> ② 何をどう届けているか（サービス・届け方）</p>
+          <p class="text-sm text-slate-600 mt-2"><strong>継続の伴走顧問</strong>が中心で、<strong>チャットは回数なし</strong>、<strong>定期的なオンライン打ち合わせ</strong>（Zoomなど）、プランによって<strong>小さな改善の試し（並行検証）をいくつ同時に進めるか</strong>と<strong>手を動かす作業の手伝いの有無</strong>が変わります。</p>
+          <p class="text-sm text-slate-500 mt-2">スポットの「生成AIコンサルティング」も別ラインで掲載されています（料金は個別見積もり、とあります）。</p>
+        </div>
+        <div class="rounded-xl border-2 border-slate-300 bg-slate-50 p-4 md:col-span-2">
+          <p class="font-bold text-slate-900 flex items-center gap-2"><i data-lucide="circle-dollar-sign" class="w-6 h-6"></i> ③ いくらでどう立っているか（価格・立ち位置）</p>
+          <p class="text-sm text-slate-600 mt-2"><strong>伴走顧問は税込で月11万円〜</strong>（ライト）／<strong>税込月33万円</strong>（ベーシック）／上位は<strong>要相談</strong>。<strong>最低3ヶ月</strong>からで、そのあとは自動更新、と書かれています。AIツール本体の月額料金は<strong>お客様側の契約</strong>で、とFAQにあります。</p>
+        </div>
+      </div>
+      <p class="text-slate-600 text-sm mt-4">たとえ話にすると、<strong>どの客層のどの棚に商品を並べているか（①）、お弁当の中身と届け方（②）、値札と店の看板（③）</strong>、と覚えると頭が空きません。</p>
+    </section>
+
+    <section class="section-card" id="section-terms">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="lightbulb" class="w-8 h-8 text-violet-600"></i>
+        先に押さえる用語
+      </h2>
+
+      <div class="term-explain">
+        <div class="flex items-start gap-4">
+          <i data-lucide="lightbulb" class="w-8 h-8 text-violet-600 flex-shrink-0"></i>
+          <div>
+            <div class="term-word text-xl font-bold">「生成AI伴走顧問」って、ここでは何を指す？</div>
+            <div class="term-meaning text-lg mt-2">
+              契約の期間中、<span class="font-bold text-violet-700">相談に乗りながら、AIの使い方や業務の直し方を一緒に進める</span>スタイルの呼び方です。税理士に毎月様子を見てもらうイメージに近いです（<strong>あくまでたとえ話</strong>で、仕事の中身は別物です）。<br>
+              この図解では<strong>「月ごとの相談役」</strong>と呼びます。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="term-explain">
+        <div class="flex items-start gap-4">
+          <i data-lucide="lightbulb" class="w-8 h-8 text-violet-600 flex-shrink-0"></i>
+          <div>
+            <div class="term-word text-xl font-bold">料金表の「並行検証」とは？</div>
+            <div class="term-meaning text-lg mt-2">
+              公式の料金表に出てくる言い方ですが、要は<span class="font-bold text-violet-700">「同時に進められる“小さな改善の試し”の件数」</span>のことです。お店でいうと、<strong>レジの直しと在庫の直しを、同じ月にいくつまで並行して試せるか</strong>のイメージです。<br>
+              この図解では<strong>「同時に試せる改善の本数」</strong>と呼びます。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="term-explain">
+        <div class="flex items-start gap-4">
+          <i data-lucide="lightbulb" class="w-8 h-8 text-violet-600 flex-shrink-0"></i>
+          <div>
+            <div class="term-word text-xl font-bold">「MTG」とは？</div>
+            <div class="term-meaning text-lg mt-2">
+              ビジネス用語で<span class="font-bold text-violet-700">打ち合わせ</span>のことです。BoostXのページでは<strong>オンライン（Zoomなど）</strong>と書かれています。<br>
+              この図解では<strong>「オンラインの打ち合わせ」</strong>と呼びます。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="term-explain">
+        <div class="flex items-start gap-4">
+          <i data-lucide="lightbulb" class="w-8 h-8 text-violet-600 flex-shrink-0"></i>
+          <div>
+            <div class="term-word text-xl font-bold">「実作業サポート」とは？</div>
+            <div class="term-meaning text-lg mt-2">
+              公式では、ベーシック以上で<span class="font-bold text-violet-700">相談だけでなく、設定やプロンプト（指示文）づくりなど、手を動かす支援</span>が入る、と読めます（範囲はプラン表の注記どおり）。<br>
+              この図解では<strong>「一緒に手を動かす支援」</strong>と呼びます。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="section-three">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="check-circle" class="w-8 h-8 text-violet-600"></i>
+        この競合でまず押さえる3つ
+      </h2>
+      <p class="text-slate-600 mb-6">細部より、<strong>一言で言える核</strong>に絞りました。各行に <strong>ターゲット／提供・届け方／価格・立ち位置</strong> と、<strong>自分の事業との関係（勝ち筋の材料）</strong> を入れます。<span class="text-slate-500">（「必須／推奨／任意」は<strong>読む順の目安</strong>で、どれもこの3要点の一部です。）</span></p>
+
+      <div class="space-y-4">
+        <div class="rounded-xl border border-slate-200 p-4 flex flex-col sm:flex-row sm:items-start gap-3">
+          <span class="badge-essential flex-shrink-0">必須</span>
+          <div>
+            <p class="font-bold text-slate-800">ターゲット：中小企業（数名規模にも対応とFAQで明記）</p>
+            <p class="text-slate-600 mt-1"><strong>要点：</strong>「社内に分かる人がいない」という<strong>組織の悩み</strong>が前面。<strong>自分との関係：</strong>あなたが狙う<strong>個人事業主・一人社長の生活と仕事の境</strong>とは、公式の語り口が<strong>少しズレる</strong>材料になります。</p>
+          </div>
+        </div>
+        <div class="rounded-xl border border-slate-200 p-4 flex flex-col sm:flex-row sm:items-start gap-3">
+          <span class="badge-recommended flex-shrink-0">推奨</span>
+          <div>
+            <p class="font-bold text-slate-800">届け方：チャット無制限＋オンライン打ち合わせ＋プランで「同時に試せる改善の本数」と「手を動かす支援」が変わる</p>
+            <p class="text-slate-600 mt-1"><strong>要点：</strong><strong>専任のAI担当の代わり</strong>という売り文句に近い。<strong>自分との関係：</strong>伴走でも<strong>「講座型」か「現場の業務フローに入り込む型」か</strong>で差がつく比較軸になります。</p>
+          </div>
+        </div>
+        <div class="rounded-xl border border-slate-200 p-4 flex flex-col sm:flex-row sm:items-start gap-3">
+          <span class="badge-optional flex-shrink-0">任意</span>
+          <div>
+            <p class="font-bold text-slate-800">価格・立ち位置：税込月11万〜（ライト）／税込月33万（ベーシック）・最低3ヶ月。ツール本体代は別</p>
+            <p class="text-slate-600 mt-1"><strong>要点：</strong>月会費が<strong>11万円台から</strong>と、講座単発より<strong>顧問の対価</strong>として説明しやすい帯。<strong>自分との関係：</strong>あなたの想定<strong>数ヶ月・15〜30万円</strong>は<strong>まとめ買いの単位</strong>なので、<strong>課金の物差しが違う</strong>と言い切れる。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="section-profile">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="building-2" class="w-8 h-8 text-violet-600"></i>
+        プロフィールと強み
+      </h2>
+
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AIまいごん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">AIまいごん:</span><br>
+            「1社に1人、低価格で専任AI人材」と書いてあって、<strong>うちの事業と何が同じで何が違うのか</strong>、短く整理してもいいですか？
+          </p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4 mb-6">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AI博士ウパ">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">AI博士ウパ:</span><br>
+            もちろんです。ここでは<strong>公式が強調している約束事</strong>だけに絞ります。たとえは<strong>「社外から入るAI担当の代行」</strong>に近いです。
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AIまいごん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">AIまいごん:</span><br>
+            強みって、数字と肩書きで決まりますか？　この会社だと何が目に入りますか？
+          </p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4 mb-6">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AI博士ウパ">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">AI博士ウパ:</span><br>
+            多くの場合、<strong>「導入で終わらせない」</strong>と<strong>「業務課題の解決をゴールにする」</strong>という言い切りが目に入ります。事例やブログ、無料相談（予約）で<strong>入口を広く</strong>取る型です。
+          </p>
+        </div>
+      </div>
+
+      <ul class="list-disc pl-6 text-slate-600 space-y-2 mb-4">
+        <li><strong>会社名</strong>：株式会社BoostX（サイト上は「BoostX」表記）。</li>
+        <li><strong>打ち出し</strong>：顧問契約で<strong>コストを抑えつつ</strong>、社内に「プロのAI人材」を置いた感覚で使う、という説明。</li>
+        <li><strong>補足</strong>：トップFAQでは、AIの知識がなくてもよく、<strong>専門用語を使わない</strong>サポート、とあります。</li>
+      </ul>
+      <p class="text-xs text-slate-500">参考: <a href="https://boostx-inc.com/" class="text-violet-700 hover:underline" target="_blank" rel="noopener noreferrer">株式会社BoostX（公式）</a></p>
+    </section>
+
+    <section class="section-card" id="section-offer">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="layout-list" class="w-8 h-8 text-violet-600"></i>
+        商品と価格
+      </h2>
+
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AIまいごん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">AIまいごん:</span><br>
+            料金、税込か税抜かで迷子になります。図解ではどう統一しますか？
+          </p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4 mb-6">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AI博士ウパ">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">AI博士ウパ:</span><br>
+            料金ページは<strong>税込</strong>と書いてあるので、このセクションは<strong>税込に合わせます</strong>。レシートの感覚で「お支払いの総額」だと思ってください。
+          </p>
+        </div>
+      </div>
+
+      <div class="rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700 space-y-3 mb-4">
+        <p><strong>料金（公式ページの要約・税込）</strong>：重要な判断の前に<strong>公式の最新表示</strong>で確認してください。チャットは<strong>SlackやChatworkなど、仕事用のチャットアプリ</strong>の例（トップFAQ）とあります。</p>
+        <p class="text-slate-600 text-sm">下の名前は<strong>公式のプラン名</strong>です。中身は右列の短いメモだけ追えば大丈夫です。</p>
+        <div class="overflow-x-auto">
+          <table class="min-w-full text-left border-collapse text-sm">
+            <thead>
+              <tr class="border-b border-slate-300">
+                <th class="py-2 pr-4">プラン</th>
+                <th class="py-2 pr-4">月額（税込）</th>
+                <th class="py-2">含まれるもの（要約）</th>
+              </tr>
+            </thead>
+            <tbody class="text-slate-600">
+              <tr class="border-b border-slate-200">
+                <td class="py-2 pr-4 font-medium text-slate-800">ライト</td>
+                <td class="py-2 pr-4">110,000円</td>
+                <td class="py-2">同時に試せる改善は1件まで／オンライン打ち合わせは月2回まで／チャットは回数なし／一緒に手を動かす支援はなし</td>
+              </tr>
+              <tr class="border-b border-slate-200">
+                <td class="py-2 pr-4 font-medium text-slate-800">ベーシック</td>
+                <td class="py-2 pr-4">330,000円</td>
+                <td class="py-2">同時に試せる改善は最大2件／打ち合わせは月3回まで／チャットは回数なし／一緒に手を動かす支援あり（公式は主に<strong>AIへの指示文づくりや設定</strong>の範囲、と読めます）</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 font-medium text-slate-800">プレミアム</td>
+                <td class="py-2 pr-4">要相談</td>
+                <td class="py-2">打ち合わせの頻度や支援の幅は個別調整（公式は「週1回〜」などの記載）</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>共通のルール（サービス詳細ページ）</strong>：<strong>最低3ヶ月</strong>から（以降は自動更新）／打ち合わせは<strong>オンライン</strong>。AIツール本体の利用料は<strong>プランに含まれず、お客様が直接契約・支払い</strong>、とあります。</p>
+        <p class="text-slate-500 text-xs"><strong>補足（今回の「3つ」から外れる枝）</strong>：スポットの生成AIコンサルティングはトップFAQで<strong>1回110,000円（税込）〜</strong>とあります。深掘りは公式で。</p>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-2 md:gap-4 text-sm text-slate-700 mb-4">
+        <span class="rounded-lg border border-violet-200 bg-white px-3 py-2">月額（税込）</span>
+        <i data-lucide="arrow-right" class="w-5 h-5 text-violet-500 hidden sm:block"></i>
+        <span class="rounded-lg border border-violet-200 bg-white px-3 py-2">チャット無制限＋オンライン打ち合わせ</span>
+        <i data-lucide="arrow-right" class="w-5 h-5 text-violet-500 hidden sm:block"></i>
+        <span class="rounded-lg border border-violet-200 bg-white px-3 py-2">プランで「試し」と「手伝い」が変わる</span>
+      </div>
+
+      <p class="text-xs text-slate-500">参考: <a href="https://boostx-inc.com/service/" class="text-violet-700 hover:underline" target="_blank" rel="noopener noreferrer">生成AI伴走顧問・料金（公式）</a></p>
+    </section>
+
+    <section class="section-card" id="section-win">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="target" class="w-8 h-8 text-violet-600"></i>
+        あなたとの比較と勝ち筋
+      </h2>
+
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AIまいごん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">AIまいごん:</span><br>
+            競合が強そうだと、逆に動けなくなるんですが……。
+          </p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4 mb-6">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AI博士ウパ">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">AI博士ウパ:</span><br>
+            図解のゴールは「勝ち筋が<strong>1行で言える</strong>」ことです。全部に勝つ必要はなく、<strong>同じお客様でも、最初の入り口と、そのあとの続き方で役割を分けられるか</strong>を書けば十分です。
+          </p>
+        </div>
+      </div>
+
+      <ul class="list-disc pl-6 text-slate-600 space-y-2 mb-4">
+        <li><strong>重なる点</strong>：生成AIを<strong>業務の横で使う</strong>話、<strong>月ごとの相談役</strong>、チャットで随時聞ける、はあなたの<strong>講師→顧問</strong>の延長と<strong>骨格が似る</strong>部分があります。</li>
+        <li><strong>ずれる点</strong>：相手は<strong>中小企業・組織の定着・並行する改善の件数</strong>の語彙が強いです。あなたが前面に出す<strong>個人事業主向けの業務フロー丸ごと</strong>や<strong>少人数に合わせた道具づくり</strong>とは、<strong>刺さる言葉の重心が違う</strong>と言い切れます。</li>
+        <li><strong>どこで勝つか（仮説の例）</strong>：<strong>セミナー中心ではなく、実際の仕事の流れに入り込み、数ヶ月で「動く形」まで持っていく</strong>。月会費の「チャット＋打ち合わせ」パッケージより、<strong>一人に合わせた設計と、まとまった期間での成果の物差し</strong>を売る、という置き方がしやすいです。</li>
+      </ul>
+
+      <p class="rounded-lg border-2 border-violet-300 bg-violet-50 p-4 text-slate-800 font-medium mb-4">
+        <span class="text-violet-900 font-bold">このページの一行（どこで勝つか）：</span>
+        相手が<strong>「税込月11万円〜の月会費で、中小企業向けに“社内AI担当の代わり”として伴走する」</strong>なら、自分は<strong>「個人事業主に寄せた数ヶ月のまとめ契約で、業務の流れごと組み替え、必要なら小さな自動化まで作る」</strong>と言い切れる。
+      </p>
+
+      <details class="rounded-lg border border-slate-200 bg-white p-4 mb-4">
+        <summary class="font-bold text-slate-800 cursor-pointer">もう少しだけ：価格帯のメモ（任意）</summary>
+        <p class="text-slate-600 mt-3 text-sm">月額を<strong>もっと手前の帯</strong>で出している別サービスと比べると、自分の<strong>値付けの階段</strong>を描きやすい、という整理用メモです。</p>
+      </details>
+
+      <p class="text-xs text-slate-500">※ 価格・条件は変更されうるため、契約や比較の最終判断は必ず各社の最新の公式表示で確認してください。</p>
+    </section>
+
+    <section class="section-card" id="section-summary">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="book-open" class="w-8 h-8 text-violet-600"></i>
+        まとめ
+      </h2>
+
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AIまいごん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">AIまいごん:</span><br>
+            なるほど。<strong>BoostXは、税込で月11万円〜の伴走顧問で、チャット無制限とオンライン打ち合わせのセット</strong>です。<br>
+            <strong>中小企業の「社内にAI担当がいない」悩み</strong>に寄せている、と理解しました。<br>
+            私の勝ち筋は<strong>「月会費の代行パッケージではなく、個人事業主向けに業務の流れごと組み替える数ヶ月契約」</strong>で言い切れそうです。つまり、そういう理解で合ってますか？
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AI博士ウパ">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">AI博士ウパ:</span><br>
+            はい、その整理で十分です。競合が変わっても、<strong>「誰・何・いくら・勝ち筋」</strong>に戻せば迷いにくいです。今日覚えるのはここまででよい、と割り切って大丈夫です。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="section-sources">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="link" class="w-8 h-8 text-violet-600"></i>
+        出典一覧（確認用）
+      </h2>
+      <ul class="list-disc pl-6 text-slate-600 space-y-2 text-sm">
+        <li><a href="https://boostx-inc.com/" class="text-violet-700 hover:underline" target="_blank" rel="noopener noreferrer">株式会社BoostX（公式トップ）</a></li>
+        <li><a href="https://boostx-inc.com/service/" class="text-violet-700 hover:underline" target="_blank" rel="noopener noreferrer">生成AI伴走顧問・料金プラン（公式）</a></li>
+        <li><a href="https://boostx-inc.com/reasons/" class="text-violet-700 hover:underline" target="_blank" rel="noopener noreferrer">選ばれる理由（公式）</a></li>
+        <li>料金・提供内容・契約条件は、掲載時点の公式表示に基づく。更新・改定がありうる。</li>
+      </ul>
+      <p class="text-xs text-slate-500 mt-4">このページは学習・整理用です。価格・契約条件は必ず各社の最新の公式表示で確認してください。第三者の評価記事は本図解では主に用いていません。</p>
+    </section>
+
+  </main>
+
+  <nav class="toc" aria-label="このページの目次">
+    <p class="text-sm font-bold text-slate-700 mb-2">目次</p>
+    <ul class="text-sm space-y-1 list-none m-0 p-0">
+      <li><a href="#section-dialogue-intro" class="text-violet-700 hover:underline">導入</a></li>
+      <li><a href="#section-map" class="text-violet-700 hover:underline">全体の地図</a></li>
+      <li><a href="#section-terms" class="text-violet-700 hover:underline">用語</a></li>
+      <li><a href="#section-three" class="text-violet-700 hover:underline">この競合でまず押さえる3つ</a></li>
+      <li><a href="#section-profile" class="text-violet-700 hover:underline">プロフィールと強み</a></li>
+      <li><a href="#section-offer" class="text-violet-700 hover:underline">商品と価格</a></li>
+      <li><a href="#section-win" class="text-violet-700 hover:underline">比較と勝ち筋</a></li>
+      <li><a href="#section-summary" class="text-violet-700 hover:underline">まとめ</a></li>
+      <li><a href="#section-sources" class="text-violet-700 hover:underline">出典</a></li>
+    </ul>
+  </nav>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>
