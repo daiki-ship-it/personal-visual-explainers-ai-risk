@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>請求書の「登録番号」は誰のため？ — パーソナル図解</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --personal-accent: hsl(258, 45%, 40%);
+      --personal-accent-light: hsl(270, 50%, 97%);
+      --learner-border: #423773;
+      --learner-bubble-a: #faf8ff;
+      --learner-bubble-b: #e8e0ff;
+      --learner-avatar-bg: #f3f0ff;
+      --nav-border: #a86f6f;
+      --nav-bubble-a: #fff9f8;
+      --nav-bubble-b: #fde8e3;
+      --nav-avatar-bg: #fef2f2;
+    }
+    body { font-family: 'Noto Sans JP', system-ui, sans-serif; }
+
+    .header-gradient {
+      background: linear-gradient(125deg, #3730a3 0%, #5b3d5c 48%, #8b5a6a 100%);
+    }
+
+    .section-card {
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .term-explain {
+      background: linear-gradient(135deg, var(--personal-accent-light) 0%, hsl(270, 40%, 99%) 100%);
+      border-left: 4px solid var(--personal-accent);
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      margin: 1.5rem 0;
+    }
+    .term-word { color: var(--personal-accent); }
+
+    .char-bubble {
+      position: relative;
+      padding: 1.25rem 1.5rem;
+      border-radius: 1rem;
+      margin-left: 0.5rem;
+    }
+    .char-bubble::before {
+      content: '';
+      position: absolute;
+      left: -10px;
+      top: 18px;
+      border-width: 10px;
+      border-style: solid;
+    }
+    .learner-bubble {
+      background: linear-gradient(135deg, var(--learner-bubble-a) 0%, var(--learner-bubble-b) 100%);
+      border: 2px solid var(--learner-border);
+    }
+    .learner-bubble::before {
+      border-color: transparent var(--learner-border) transparent transparent;
+    }
+    .guide-bubble {
+      background: linear-gradient(135deg, var(--nav-bubble-a) 0%, var(--nav-bubble-b) 100%);
+      border: 2px solid var(--nav-border);
+    }
+    .guide-bubble::before {
+      border-color: transparent var(--nav-border) transparent transparent;
+    }
+
+    .learner-avatar {
+      border: 2px solid var(--learner-border);
+      background: var(--learner-avatar-bg);
+    }
+    .navigator-avatar {
+      border: 2px solid var(--nav-border);
+      background: var(--nav-avatar-bg);
+    }
+
+    .label-learner { color: #2e285a; }
+    .label-navigator { color: #5c3030; }
+
+    .badge-essential {
+      background: linear-gradient(135deg, #b91c1c 0%, #ef4444 100%);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    .badge-recommended {
+      background: linear-gradient(135deg, #5b4d8c 0%, #8b6b8e 100%);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .toc {
+      position: fixed;
+      left: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: white;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      max-height: 80vh;
+      overflow-y: auto;
+      z-index: 50;
+    }
+    @media (max-width: 1280px) {
+      .toc { display: none; }
+    }
+  </style>
+</head>
+<body class="bg-violet-50">
+  <header class="header-gradient text-white py-8">
+    <div class="max-w-4xl mx-auto px-4">
+      <h1 class="text-3xl md:text-4xl font-bold">請求書の「登録番号」は、誰のための印？</h1>
+      <p class="mt-2 text-lg opacity-90">消費税の<strong>インボイス</strong>と、<strong>番号付き請求を出すための登録</strong>を、事業づくりの地図にする</p>
+      <p class="mt-3 text-sm opacity-85 max-w-3xl">今回取り上げる1テーマは<strong>「インボイス対応の請求書と、インボイス発行事業者の登録」</strong>です。選んだ理由は、<strong>法人向けの講師・コンサルでは経理が登録番号付きの請求を前提にしやすく、免税のままか登録するかで取引条件と自分の消費税の扱いの両方が動くから</strong>です（整理日: 2026年3月25日。最終判断は税務署・税理士等と最新の法令・国税庁の公表に従ってください）。</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-8">
+
+    <section class="section-card" id="section-dialogue-intro">
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ぱにっくん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">ぱにっくん:</span><br>
+            「インボイス」って聞くと<strong>請求書のデザイン</strong>の話だと思ってました。でも取引先が<strong>登録番号</strong>を言い始めて、<strong>自分がどうすればいいか</strong>がわからなくて止まります……。
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 mb-2">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ウパ博士">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">ウパ博士:</span><br>
+            大丈夫です。いまのページは<strong>「正体 → 事業でどう出るか → 次に確認する場所」</strong>の<strong>短い地図（3ブロック）</strong>にします。数字の細部は<strong>国税庁のページとPDF</strong>に任せて、まずは<strong>判断の軸</strong>だけ持ち帰りましょう。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="section-map">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="map" class="w-8 h-8 text-violet-600"></i>
+        全体の地図（この1テーマの流れ）
+      </h2>
+      <p class="text-slate-600 mb-6"><strong>定義 → 事業での現れ方（具体例）→ 使い方・次の一歩</strong>が一目でわかるように、<strong>3ブロック</strong>にまとめました。</p>
+
+      <div class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-xl border-2 border-violet-200 bg-violet-50 p-4 md:col-span-2">
+          <p class="font-bold text-violet-900 flex items-center gap-2"><i data-lucide="help-circle" class="w-6 h-6"></i> ① 正体（何の話か）</p>
+          <p class="text-sm text-slate-600 mt-2">要するに、<strong>「いくらで、うちの税率は何％で、その分の消費税はいくらか」が書かれた請求書や領収書の形</strong>を、国が<strong>消費税の計算の土台</strong>にしよう、という話です（書類の名前は「請求書」でなくてもよい、と国税庁に説明があります）。<strong>下の用語</strong>で、買う側・売る側それぞれの言葉も足していきます。</p>
+        </div>
+        <div class="rounded-xl border-2 border-rose-200 bg-rose-50 p-4 md:col-span-2">
+          <p class="font-bold text-rose-900 flex items-center gap-2"><i data-lucide="alert-triangle" class="w-6 h-6"></i> ② 事業でどう出るか（具体例）</p>
+          <p class="text-sm text-slate-600 mt-2"><strong>法人の経理</strong>は、会社の消費税の計算をきちんとしたいとき、<strong>登録番号など所定の記載がある請求書</strong>を求めやすいです。こちらが<strong>番号付き請求を出す登録をしていない</strong>場合、相手側は<strong>別のルール（経過措置など）</strong>に当てはめることになり、<strong>契約条件や単価の話</strong>に影響しうる、と捉えると混乱が減ります。セミナーの<strong>参加費の領収書</strong>と<strong>法人への請求書</strong>で、相手が求める体裁が違う、に近いです。</p>
+        </div>
+        <div class="rounded-xl border-2 border-slate-300 bg-slate-50 p-4 md:col-span-2">
+          <p class="font-bold text-slate-900 flex items-center gap-2"><i data-lucide="shield-check" class="w-6 h-6"></i> ③ 使い方・次の一歩</p>
+          <p class="text-sm text-slate-600 mt-2">まず<strong>国税庁「インボイス制度について」</strong>の<strong>売手・買手の留意点</strong>と、悩む人向けの<strong>事前準備チェックシート（PDF）</strong>を開くのが近道です。取引先には<strong>「いつから番号付きが必要か」</strong>を一言確認し、自分は<strong>税理士・インボイスコールセンター</strong>のどちらを当たるか決める、までで十分なスタートです。</p>
+        </div>
+      </div>
+      <p class="text-slate-600 text-sm mt-4">たとえ話にすると、<strong>二人で割り勘するときに「内訳と小計が書いてあるメモ」</strong>をお互いに見せ合う、に近いです。<strong>登録番号</strong>は、そのメモが<strong>税務署に届け出た形で出せることの目印</strong>、と言い換えられます。</p>
+    </section>
+
+    <section class="section-card" id="section-terms">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="lightbulb" class="w-8 h-8 text-violet-600"></i>
+        先に押さえる用語
+      </h2>
+
+      <div class="term-explain">
+        <div class="flex items-start gap-4">
+          <i data-lucide="lightbulb" class="w-8 h-8 text-violet-600 flex-shrink-0"></i>
+          <div>
+            <div class="term-word text-xl font-bold">「インボイス」とは？</div>
+            <div class="term-meaning text-lg mt-2">
+              難しい名前ですが、要は<span class="font-bold text-violet-700">「消費税の計算に使えるように、決まった項目が書いてある請求書・領収書などのこと（名称は問わない）」</span>です。国税庁では、<strong>相手方の氏名・売手の氏名と登録番号・取引日・内容・対価と税率・税額</strong>などが例として挙げられています。<br>
+              この図解では<strong>「番号と税額が揃った請求の形」</strong>と呼びます。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="term-explain">
+        <div class="flex items-start gap-4">
+          <i data-lucide="lightbulb" class="w-8 h-8 text-violet-600 flex-shrink-0"></i>
+          <div>
+            <div class="term-word text-xl font-bold">「インボイス発行事業者の登録」とは？</div>
+            <div class="term-meaning text-lg mt-2">
+              正式には<span class="font-bold text-violet-700">「適格請求書等を発行する事業者として、あらかじめ税務署に届け出ること」</span>です。国税庁の留意点では、<strong>インボイスを交付するにはこの登録が必要</strong>、<strong>登録すると課税事業者として消費税の申告が必要になる</strong>、と書かれています。銀行の<strong>「振込名義を正式に使うには、先に口座の名義をそろえる」</strong>くらい、<strong>後から出す書類のために先に窓口へ行く</strong>イメージです。<br>
+              この図解では<strong>「番号付き請求を出すための事前のお知らせ（登録）」</strong>と呼びます。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="term-explain">
+        <div class="flex items-start gap-4">
+          <i data-lucide="lightbulb" class="w-8 h-8 text-violet-600 flex-shrink-0"></i>
+          <div>
+            <div class="term-word text-xl font-bold">「仕入税額控除」とは？</div>
+            <div class="term-meaning text-lg mt-2">
+              要は<span class="font-bold text-violet-700">「仕入れや経費で払った消費税のうち、本当に事業に使った分を、あとで納める税から差し引いてよい、という計算」</span>です。国税庁では、差し引くために<strong>インボイスを保存する必要がある</strong>、インボイスがない仕入れは原則控除できない、と説明されています。<strong>簡易課税・2割特例</strong>などは別ルートがあります。<br>
+              この図解では<strong>「買った側の消費税の戻し計算」</strong>と呼びます。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="section-three">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="check-circle" class="w-8 h-8 text-violet-600"></i>
+        今日の3つの要点
+      </h2>
+      <p class="text-slate-600 mb-6">この1テーマについて、<strong>① 正体 ② 自分と世の中 ③ 今日からの一歩</strong>に沿って圧縮しました。</p>
+
+      <div class="space-y-4">
+        <div class="rounded-xl border border-slate-200 p-4 flex flex-col sm:flex-row sm:items-start gap-3">
+          <span class="badge-essential flex-shrink-0">必須</span>
+          <div>
+            <p class="font-bold text-slate-800">この考え方（・用語）の正体</p>
+            <p class="text-slate-600 mt-1"><strong>要点：</strong>インボイスは<strong>見た目の流行</strong>ではなく、<strong>消費税の計算をそろえるための証憑</strong>。番号付き請求を出すには原則<strong>発行事業者の登録</strong>が要り、登録すると<strong>課税事業者として申告</strong>の話がセット。<strong>メモ一行：</strong>「<strong>相手の控除と、自分の申告はセットで考える</strong>」。</p>
+          </div>
+        </div>
+        <div class="rounded-xl border border-slate-200 p-4 flex flex-col sm:flex-row sm:items-start gap-3">
+          <span class="badge-recommended flex-shrink-0">推奨</span>
+          <div>
+            <p class="font-bold text-slate-800">自分の事業に近い意味と、世の中での位置づけ</p>
+            <p class="text-slate-600 mt-1"><strong>要点（自分）：</strong>AI講師・これからの顧問では、<strong>法人請求のテンプレ</strong>に登録番号・税率・税額を載せられるか、が<strong>単価交渉の前に</strong>効く。<strong>要点（世の中）：</strong><strong>会社同士の取引</strong>で広く使われる消費税のルール。国税庁は<strong>令和11年（2029年）9月末まで</strong>、インボイスがない場合の<strong>経過措置</strong>がある旨を案内しています（割合はQ&A PDFで確認）。</p>
+          </div>
+        </div>
+        <div class="rounded-xl border border-slate-200 p-4 flex flex-col sm:flex-row sm:items-start gap-3">
+          <span class="badge-essential flex-shrink-0">一歩</span>
+          <div>
+            <p class="font-bold text-slate-800">今日からの使い方</p>
+            <p class="text-slate-600 mt-1"><strong>要点：</strong>チェック1つ＝<strong>「主要な取引先は番号付き請求を必須にしているか」</strong>。並行して<strong>国税庁のチェックシートPDF</strong>を開き、<strong>登録する／しないの論点</strong>に丸を付ける。迷ったら<strong>税理士またはインボイスコールセンター</strong>へ。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="section-why-client">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="message-circle-question" class="w-8 h-8 text-violet-600"></i>
+        なぜ取引先は「登録番号」を気にするのか
+      </h2>
+
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ぱにっくん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">ぱにっくん:</span><br>
+            こちらが<strong>悪いわけじゃないのに</strong>、番号がないと困るのは<strong>向こうの都合</strong>ですか？
+          </p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4 mb-6">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ウパ博士">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">ウパ博士:</span><br>
+            多くの場合、向こうは<strong>自分の会社の消費税の計算を正しくしたい</strong>だけです。国税庁では、買う側は原則<strong>所定の請求書（インボイス）をもらって保存</strong>しないと、支払った消費税を<strong>うまく差し引けない</strong>、と説明されています。だから<strong>番号付きの形をお願いする</strong>流れが出ます。相手を責める話ではなく、<strong>お互いの帳簿の書き方をそろえる</strong>話、と捉えると整理しやすいです。
+          </p>
+        </div>
+      </div>
+
+      <ul class="list-disc pl-6 text-slate-600 space-y-2 mb-4">
+        <li>国税庁は、<strong>求められたときはインボイスを交付しなければならない</strong>（売手が発行事業者の場合）、とも書いています。</li>
+        <li><strong>所得税など</strong>の観点では、買手側も<strong>従来どおり領収書・請求書の保存が必要</strong>、とインボイス制度のページでも触れられています（消費税の話と混ぜない、がコツです）。</li>
+      </ul>
+      <p class="text-xs text-slate-500">※ 個別の取引で何を求められるかは契約・実務次第です。最終判断は専門家へ。</p>
+    </section>
+
+    <section class="section-card" id="section-fork">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="git-branch" class="w-8 h-8 text-violet-600"></i>
+        「登録する／しない」の分かれ道（公式が言う軸だけ）
+      </h2>
+
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ぱにっくん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">ぱにっくん:</span><br>
+            <strong>免税のまま</strong>はダメなんですか？　ネットだと<strong>怖い言い方</strong>ばかりで……。
+          </p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4 mb-6">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ウパ博士">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">ウパ博士:</span><br>
+            公式の書き方では、<strong>登録すると課税事業者として申告が必要</strong>、という<strong>トレードオフ</strong>（得るものと増える手続の両方）が中心です。免税のままかどうかは、<strong>売上の見通し・取引先の要望・経理の手間</strong>とセットです。今日は<strong>「登録は消費税の世界の入口」</strong>だけ覚えてください。2割特例や簡易課税は<strong>国税庁の専用ページ</strong>で条件を確認、で十分です。
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row gap-4 items-stretch mb-4">
+        <div class="flex-1 rounded-xl border-2 border-violet-200 bg-white p-4">
+          <p class="font-bold text-violet-900 text-sm mb-2">登録して番号付き請求を出すイメージ</p>
+          <p class="text-sm text-slate-600">取引先の経理が<strong>仕入税額控除を取りやすい形</strong>に寄せられる。一方で<strong>自分は消費税の申告側</strong>の準備が要る、という整理。</p>
+        </div>
+        <div class="hidden md:flex items-center text-slate-400"><i data-lucide="arrow-right" class="w-8 h-8"></i></div>
+        <div class="flex-1 rounded-xl border-2 border-slate-200 bg-slate-50 p-4">
+          <p class="font-bold text-slate-800 text-sm mb-2">免税事業者のまま等のイメージ</p>
+          <p class="text-sm text-slate-600">自分の申告のしかたは別の話になりうる。相手側は<strong>経過措置</strong>などの説明に当たることがある（<strong>割合や期間はPDFで確認</strong>）。</p>
+        </div>
+      </div>
+
+      <details class="rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
+        <summary class="font-bold text-slate-800 cursor-pointer">もう少しだけ：経過措置の「日付」は公式で確認</summary>
+        <p class="mt-2">国税庁「インボイス制度について」では、<strong>令和11年（2029年）9月末まで</strong>、インボイスの保存がなくても一定割合を仕入税額とみなす<strong>経過措置</strong>がある旨が書かれ、詳細は<strong>Q&A PDF（s03.pdf）</strong>へ誘導されています。図解の時点より改正がある可能性があるので、<strong>手を動かす直前に</strong>必ず原文を当ててください。</p>
+      </details>
+    </section>
+
+    <section class="section-card" id="section-advisor-use">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="users" class="w-8 h-8 text-violet-600"></i>
+        AI講師・顧問コンサルとしての使いどころ
+      </h2>
+
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ぱにっくん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">ぱにっくん:</span><br>
+            これ、<strong>見積・契約書・請求のテンプレ</strong>にどう反映すればいいですか？　<strong>クライアントに説明</strong>するときの言い方も知りたいです。
+          </p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4 mb-6">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ウパ博士">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">ウパ博士:</span><br>
+            自分の事業では、<strong>請求テンプレに「登録番号・税率・税額・取引日」</strong>を載せられる状態にしておくと、法人案件で<strong>差し戻しが減る</strong>ことが多いです。クライアントには<strong>税の断定はしない</strong>前提で、<strong>国税庁のチェックシートに近い形</strong>だと説明し、<strong>公式URLを添える</strong>のが安全です。顧問先の<strong>発注書の書式</strong>と<strong>自分の請求書</strong>を並べて1回だけ突き合わせる、が実務的です。
+          </p>
+        </div>
+      </div>
+
+      <ul class="list-disc pl-6 text-slate-600 space-y-2 mb-4">
+        <li><strong>オンライン講座の個人受講生</strong>向けと、<strong>法人研修の請負</strong>では、相手の経理が求める<strong>紙・データの形</strong>が変わりうる、と割り切る。</li>
+        <li><strong>業務フロー改善の提案</strong>では、会計ソフトで<strong>請求や経費を登録するとき</strong>にインボイスがどう扱われるかまで視野に入れると、クライアントにとっての価値が出やすいです。</li>
+      </ul>
+    </section>
+
+    <section class="section-card" id="section-next">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="list-checks" class="w-8 h-8 text-violet-600"></i>
+        今日からの一歩（チェック）
+      </h2>
+
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ぱにっくん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">ぱにっくん:</span><br>
+            <strong>メモに残す一行</strong>、シンプルに欲しいです。
+          </p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4 mb-6">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ウパ博士">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">ウパ博士:</span><br>
+            コピペ用に2案。<strong>案A</strong>：「<strong>番号付き請求は相手の消費税計算のため。自分は登録と申告のセットか、免税のままかを公式チェックシートで決める</strong>」。<strong>案B</strong>：「<strong>請求テンプレは登録番号・税率・税額まで。所得税の保存は別ルートで確認</strong>」。
+          </p>
+        </div>
+      </div>
+
+      <div class="rounded-lg border-2 border-violet-300 bg-violet-50 p-4 text-slate-800 font-medium mb-4">
+        <span class="text-violet-900 font-bold">コピペ用ワンラインメモ：</span><br>
+        <strong>案A</strong> 「インボイスは見た目ではなく証憑。番号付きを出すなら登録と申告の覚悟、出さないなら相手は経過措置などの別ルール。公式PDFで丸を付ける。」<br>
+        <strong>案B</strong> 「法人請求は国税庁の記載例に寄せる。消費税と所得税の保存は別。迷ったらコールセンターか税理士。」
+      </div>
+
+      <ul class="list-disc pl-6 text-slate-600 space-y-2">
+        <li>チェック1：登録するかどうかの判断材料は、<strong>免税事業者向けリーフレット（令和7年6月改訂版など）</strong>と<strong>事前準備チェックシート</strong>で確認（数値基準は原文で）。</li>
+        <li>チェック2：<strong>インボイスコールセンター・説明会資料</strong>をブックマーク（国税庁「インボイス制度について」内）。</li>
+        <li>チェック3：請求ソフトで<strong>「インボイス形式」</strong>のプリセットがあるか見る（中身はチェックシートと照合）。</li>
+      </ul>
+    </section>
+
+    <section class="section-card" id="section-summary">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="book-open" class="w-8 h-8 text-violet-600"></i>
+        まとめ
+      </h2>
+
+      <div class="rounded-lg border border-violet-200 bg-violet-50/90 p-4 mb-6 text-slate-700 text-sm space-y-2">
+        <p class="font-bold text-slate-800">このまとめで押さえる3点</p>
+        <ul class="list-disc pl-5 space-y-1 m-0">
+          <li><strong>一言：</strong>インボイスは<strong>消費税の計算をそろえるための請求・領収の形</strong>で、番号付きを出すには原則<strong>発行事業者の登録</strong>が要る。登録は<strong>自分も課税事業者として申告する</strong>入口でもある。</li>
+          <li><strong>自分の事業／広い文脈：</strong>AI講師・これからの顧問では、<strong>法人案件の請求テンプレと契約前のすり合わせ</strong>が再現性になる。世の中では、BtoBの<strong>仕入税額控除</strong>をめぐる<strong>共通ルール</strong>として位置づけられる。</li>
+          <li><strong>事業構築で外さないポイント：</strong>（1）相手の経理が求めるのは<strong>見た目</strong>ではなく<strong>消費税の計算の根拠</strong>（2）<strong>登録するか免税のままか</strong>は公式チェックシートで一度自分ごと化（3）クライアントには<strong>断定せず国税庁のURLと専門家</strong>を添え、<strong>所得税の書類保存</strong>は消費税とは別に確認。</li>
+        </ul>
+      </div>
+
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ぱにっくん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">ぱにっくん:</span><br>
+            私の言葉だと、<strong>「登録番号は『番号付き請求を出せる人』の印で、法人の経理はそれで消費税の計算をそろえたい。自分は登録するなら申告の覚悟までセット。テンプレと公式PDFで一度整理」</strong>、ですね。つまり、そういう理解で合ってますか？
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ウパ博士">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">ウパ博士:</span><br>
+            はい、その整理で十分です。細部の数字は<strong>手を動かす直前に</strong>国税庁を開けばよいので、今日覚えるのはここまででよい、と割り切って大丈夫です。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="section-sources">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="link" class="w-8 h-8 text-violet-600"></i>
+        出典一覧（確認用）
+      </h2>
+      <ul class="list-disc pl-6 text-slate-600 space-y-2 text-sm">
+        <li><a href="https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/invoice_about.htm" class="text-violet-700 hover:underline" target="_blank" rel="noopener noreferrer">国税庁 — インボイス制度について（経過措置の案内・売手・買手の留意点。ページ内に令和7年10月・11月のリーフレット改訂、免税事業者向けPDFの令和7年6月改訂などの表記）</a></li>
+        <li><a href="https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/pdf/qa/s03.pdf" class="text-violet-700 hover:underline" target="_blank" rel="noopener noreferrer">国税庁 — インボイス制度 Q&A PDF（経過措置等。本文・改訂履歴はPDF表記に従う）</a></li>
+        <li><a href="https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/pdf/0022009-057.pdf" class="text-violet-700 hover:underline" target="_blank" rel="noopener noreferrer">国税庁 — インボイス制度への事前準備の基本項目チェックシート PDF（令和7年6月改訂の表記あり）</a></li>
+        <li><a href="https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/invoice_2tokurei.htm" class="text-violet-700 hover:underline" target="_blank" rel="noopener noreferrer">国税庁 — インボイス制度における「２割特例」について</a></li>
+        <li><a href="https://www.jftc.go.jp/invoice/index.html" class="text-violet-700 hover:underline" target="_blank" rel="noopener noreferrer">公正取引委員会 — インボイス制度関連コーナー（ページ上の更新日・表記に従う）</a></li>
+      </ul>
+      <p class="text-xs text-slate-500 mt-4">このページは学習・整理用です。税額計算・登録の要否・申告の最終判断は、国税庁の最新情報および税理士等の助言に依頼してください。本ページは税務アドバイスではありません。</p>
+    </section>
+
+  </main>
+
+  <nav class="toc" aria-label="このページの目次">
+    <p class="text-sm font-bold text-slate-700 mb-2">目次</p>
+    <ul class="text-sm space-y-1 list-none m-0 p-0">
+      <li><a href="#section-dialogue-intro" class="text-violet-700 hover:underline">導入</a></li>
+      <li><a href="#section-map" class="text-violet-700 hover:underline">全体の地図</a></li>
+      <li><a href="#section-terms" class="text-violet-700 hover:underline">用語</a></li>
+      <li><a href="#section-three" class="text-violet-700 hover:underline">今日の3つの要点</a></li>
+      <li><a href="#section-why-client" class="text-violet-700 hover:underline">取引先と登録番号</a></li>
+      <li><a href="#section-fork" class="text-violet-700 hover:underline">登録する／しない</a></li>
+      <li><a href="#section-advisor-use" class="text-violet-700 hover:underline">講師・顧問での使いどころ</a></li>
+      <li><a href="#section-next" class="text-violet-700 hover:underline">今日からの一歩</a></li>
+      <li><a href="#section-summary" class="text-violet-700 hover:underline">まとめ</a></li>
+      <li><a href="#section-sources" class="text-violet-700 hover:underline">出典</a></li>
+    </ul>
+  </nav>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

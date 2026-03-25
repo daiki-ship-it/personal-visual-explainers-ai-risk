@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIを挟んだ仕事の「約束ごと」 — パーソナル図解</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --personal-accent: hsl(258, 45%, 40%);
+      --personal-accent-light: hsl(270, 50%, 97%);
+      --learner-border: #423773;
+      --learner-bubble-a: #faf8ff;
+      --learner-bubble-b: #e8e0ff;
+      --learner-avatar-bg: #f3f0ff;
+      --nav-border: #a86f6f;
+      --nav-bubble-a: #fff9f8;
+      --nav-bubble-b: #fde8e3;
+      --nav-avatar-bg: #fef2f2;
+    }
+    body { font-family: 'Noto Sans JP', system-ui, sans-serif; }
+
+    .header-gradient {
+      background: linear-gradient(125deg, #3730a3 0%, #5b3d5c 48%, #8b5a6a 100%);
+    }
+
+    .section-card {
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .term-explain {
+      background: linear-gradient(135deg, var(--personal-accent-light) 0%, hsl(270, 40%, 99%) 100%);
+      border-left: 4px solid var(--personal-accent);
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      margin: 1.5rem 0;
+    }
+    .term-word { color: var(--personal-accent); }
+
+    .char-bubble {
+      position: relative;
+      padding: 1.25rem 1.5rem;
+      border-radius: 1rem;
+      margin-left: 0.5rem;
+    }
+    .char-bubble::before {
+      content: '';
+      position: absolute;
+      left: -10px;
+      top: 18px;
+      border-width: 10px;
+      border-style: solid;
+    }
+    .learner-bubble {
+      background: linear-gradient(135deg, var(--learner-bubble-a) 0%, var(--learner-bubble-b) 100%);
+      border: 2px solid var(--learner-border);
+    }
+    .learner-bubble::before {
+      border-color: transparent var(--learner-border) transparent transparent;
+    }
+    .guide-bubble {
+      background: linear-gradient(135deg, var(--nav-bubble-a) 0%, var(--nav-bubble-b) 100%);
+      border: 2px solid var(--nav-border);
+    }
+    .guide-bubble::before {
+      border-color: transparent var(--nav-border) transparent transparent;
+    }
+
+    .learner-avatar {
+      border: 2px solid var(--learner-border);
+      background: var(--learner-avatar-bg);
+    }
+    .navigator-avatar {
+      border: 2px solid var(--nav-border);
+      background: var(--nav-avatar-bg);
+    }
+
+    .label-learner { color: #2e285a; }
+    .label-navigator { color: #5c3030; }
+
+    .badge-essential {
+      background: linear-gradient(135deg, #b91c1c 0%, #ef4444 100%);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    .badge-recommended {
+      background: linear-gradient(135deg, #5b4d8c 0%, #8b6b8e 100%);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    .badge-optional {
+      background: linear-gradient(135deg, #6b7280 0%, #9ca3af 100%);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .code-block {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      overflow-x: auto;
+      font-family: ui-monospace, monospace;
+      font-size: 0.875rem;
+      line-height: 1.7;
+    }
+
+    .toc {
+      position: fixed;
+      left: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: white;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      max-height: 80vh;
+      overflow-y: auto;
+      z-index: 50;
+    }
+    @media (max-width: 1280px) {
+      .toc { display: none; }
+    }
+  </style>
+</head>
+<body class="bg-violet-50">
+  <header class="header-gradient text-white py-8">
+    <div class="max-w-4xl mx-auto px-4">
+      <h1 class="text-3xl md:text-4xl font-bold">AIを挟んだ仕事の「約束ごと」</h1>
+      <p class="mt-2 text-lg opacity-90">データ・生成物・責任の境界を、<strong>契約とメモ</strong>で一枚の地図にする</p>
+      <p class="mt-3 text-sm opacity-85 max-w-3xl">今回取り上げる1テーマは<strong>「AIで仕事を渡す・受けるときの約束ごと（データ・成果・責任の線引き）」</strong>です。選んだ理由は、<strong>経済産業省が2025年2月に「契約チェックリスト」を公表し話の共通語になりやすい</strong>一方で、<strong>2026年1月から中小受託取引のルールが「取適法」として整理され直したタイミング</strong>と重なり、個人・小さな事業でも取引の型を持つ価値が高いからです（整理日: 2026年3月25日）。</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-8">
+
+    <section class="section-card" id="section-dialogue-intro">
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ぱにっくん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">ぱにっくん:</span><br>
+            ChatGPTや画像生成を<strong>講座や顧問の仕事に入れる</strong>と、「<strong>著作権は？</strong>」「<strong>間違ったら誰のせい？</strong>」が<strong>口約束のまま</strong>になりそうで怖いです。<strong>法律の本は厚すぎて</strong>手が出ません……。
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 mb-2">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ウパ博士">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">ウパ博士:</span><br>
+            大丈夫です。いまのページは<strong>事業を作るうえでの基本を1テーマだけ</strong>掘り下げます。<strong>何か（定義）→ 事業でどう出るか → 次の一歩</strong>の<strong>短い地図（3ブロック）</strong>で追いかけましょう。細部の最終判断は<strong>専門家と最新の条文・要領</strong>に任せる前提でよいです。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="section-map">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="map" class="w-8 h-8 text-violet-600"></i>
+        全体の地図（この1テーマの流れ）
+      </h2>
+      <p class="text-slate-600 mb-6"><strong>定義 → 事業での現れ方（具体例）→ 使い方・次の一歩</strong>が一目でわかるように、<strong>3ブロック</strong>にまとめました。</p>
+
+      <div class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-xl border-2 border-violet-200 bg-violet-50 p-4 md:col-span-2">
+          <p class="font-bold text-violet-900 flex items-center gap-2"><i data-lucide="help-circle" class="w-6 h-6"></i> ① 正体（何の話か）</p>
+          <p class="text-sm text-slate-600 mt-2">クライアントや外注先と<strong>AIを挟んだ業務</strong>をするとき、<strong>入れるデータ・出てくる成果物・正しさや法令の保証・セキュリティ</strong>を、<strong>誰がどこまで担うか</strong>を契約や覚書で書き分けることです。難しい名前は後回しで、要は<strong>「地図の国境線」を文章で引く作業</strong>に近いです。</p>
+        </div>
+        <div class="rounded-xl border-2 border-rose-200 bg-rose-50 p-4 md:col-span-2">
+          <p class="font-bold text-rose-900 flex items-center gap-2"><i data-lucide="alert-triangle" class="w-6 h-6"></i> ② 事業でどう出るか（ズレやすいところ）</p>
+          <p class="text-sm text-slate-600 mt-2"><strong>「AIが出したから大丈夫」</strong>と思われる／<strong>「学習に使われないはず」</strong>と口だけで進む、と後から揉めやすいです。たとえば<strong>受講生の課題をAIに入れる講座</strong>や、<strong>顧客の売上表を触る顧問</strong>では、<strong>秘密・誤り・納品物の権利</strong>が一気に絡みます。</p>
+        </div>
+        <div class="rounded-xl border-2 border-slate-300 bg-slate-50 p-4 md:col-span-2">
+          <p class="font-bold text-slate-900 flex items-center gap-2"><i data-lucide="shield-check" class="w-6 h-6"></i> ③ 使い方・次の一歩</p>
+          <p class="text-sm text-slate-600 mt-2">経済産業省の<strong>「AIの利用・開発に関する契約チェックリスト」（2025年2月18日公表のPDF）</strong>を、<strong>目次レベルで眺めて「自分の案件で当てはまる見出し」</strong>をメモする。あわせて<strong>報酬・支払・業務内容は書面で明示</strong>する習慣を、取引の土台にする、が現実的な一歩です。</p>
+        </div>
+      </div>
+      <p class="text-slate-600 text-sm mt-4">たとえ話にすると、<strong>オンライン講座の募集ページ</strong>で「受講生の課題をサンプルとして公開していいか」「AIの下書きを講師が直す範囲はどこまでか」を書かずに募集だけ始める、に近いです。AIは<strong>道具が増えただけで、線引きの要否はむしろ増える</strong>、と言い換えられます。</p>
+    </section>
+
+    <section class="section-card" id="section-terms">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="lightbulb" class="w-8 h-8 text-violet-600"></i>
+        先に押さえる用語
+      </h2>
+
+      <div class="term-explain">
+        <div class="flex items-start gap-4">
+          <i data-lucide="lightbulb" class="w-8 h-8 text-violet-600 flex-shrink-0"></i>
+          <div>
+            <div class="term-word text-xl font-bold">「SOW（エスオーダブリュー）」って、ここでは何？</div>
+            <div class="term-meaning text-lg mt-2">
+              難しい名前ですが、要は<span class="font-bold text-violet-700">「今回の仕事で、ここからここまでやります／やりません」</span>を書いた<strong>作業範囲のメモ</strong>です。英語の略称は<strong>Statement of Work（作業範囲を書いた文書）</strong>と呼ばれることが多いです。講座なら<strong>「教材のどこまで作るか」</strong>、顧問なら<strong>「週に何を見るか・何は見ないか」</strong>の境界に近いです。<br>
+              この図解では<strong>「作業範囲メモ（SOW）」</strong>と呼びます。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="term-explain">
+        <div class="flex items-start gap-4">
+          <i data-lucide="lightbulb" class="w-8 h-8 text-violet-600 flex-shrink-0"></i>
+          <div>
+            <div class="term-word text-xl font-bold">「インプット」と「アウトプット」って、ここでは何？</div>
+            <div class="term-meaning text-lg mt-2">
+              要は<span class="font-bold text-violet-700">「AIに入れる材料」と「AIから出てくる答え・文章・画像などの成果」</span>です。経産省のチェックリストでも、この2つに分けて論点が並んでいます。料理に例えると、<strong>インプット＝冷蔵庫の材料とレシピ（依頼文）</strong>、<strong>アウトプット＝完成した皿</strong>。どちらの<strong>著作権や秘密・再利用</strong>をどうするかが論点になります。<br>
+              この図解では<strong>「入れる材料」と「出てくる成果」</strong>と呼び分けます。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="term-explain">
+        <div class="flex items-start gap-4">
+          <i data-lucide="lightbulb" class="w-8 h-8 text-violet-600 flex-shrink-0"></i>
+          <div>
+            <div class="term-word text-xl font-bold">「取適法（とりてきほう）」って、ここでは何？</div>
+            <div class="term-meaning text-lg mt-2">
+              正式には<span class="font-bold text-violet-700">中小受託取引適正化法</span>と呼ばれ、<strong>2026年1月1日</strong>から施行された新しい呼び方・枠組みとして広く案内されています（旧「下請法」からの移行が話題になった時期と重なります）。要は<strong>「大きい発注側と、受けた中小・個人の受託側の取引を、より透明にしようとするルールの束」</strong>のイメージです。<strong>情報成果物や役務の委託</strong>とも関係が語られることがあります。<br>
+              この図解では<strong>「受託取引を整える新しいルールの総称（取適法）」</strong>と呼びます。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="term-explain">
+        <div class="flex items-start gap-4">
+          <i data-lucide="lightbulb" class="w-8 h-8 text-violet-600 flex-shrink-0"></i>
+          <div>
+            <div class="term-word text-xl font-bold">「フリーランス新法」って、ここでは何？</div>
+            <div class="term-meaning text-lg mt-2">
+              難しい名前ですが、要は<span class="font-bold text-violet-700">「個人で受ける仕事について、報酬や期日などの条件を、書面などで残しやすくするためのルール」</span>だと覚えるとよいです（正式名称や細目は法令と公式を確認）。AIの話と<strong>直結しない</strong>ですが、<strong>受託で仕事を受ける自分</strong>にとっては、<strong>取引の土台を書面でそろえる習慣</strong>とセットで効いてきます。<br>
+              この図解では<strong>「個人の受託の条件を書き残す流れを後押しする法律のイメージ」</strong>と呼びます。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="section-three">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="check-circle" class="w-8 h-8 text-violet-600"></i>
+        今日の3つの要点
+      </h2>
+      <p class="text-slate-600 mb-6">この1テーマについて、<strong>① 正体 ② 自分と世の中 ③ 今日からの一歩</strong>に沿って圧縮しました。</p>
+
+      <div class="space-y-4">
+        <div class="rounded-xl border border-slate-200 p-4 flex flex-col sm:flex-row sm:items-start gap-3">
+          <span class="badge-essential flex-shrink-0">必須</span>
+          <div>
+            <p class="font-bold text-slate-800">この考え方の正体</p>
+            <p class="text-slate-600 mt-1"><strong>要点：</strong>AIを使うほど、<strong>「入れる材料・出る成果・正しさの保証・秘密」</strong>の4つが<strong>口約束だと崩れやすい</strong>。契約や覚書は<strong>怖い書類というより、地図</strong>。<strong>メモ一行：</strong>「<strong>保証しないことと、人が確認することを、見積もりと同じ粒度で書く</strong>」。</p>
+          </div>
+        </div>
+        <div class="rounded-xl border border-slate-200 p-4 flex flex-col sm:flex-row sm:items-start gap-3">
+          <span class="badge-recommended flex-shrink-0">推奨</span>
+          <div>
+            <p class="font-bold text-slate-800">自分の事業に近い意味と、世の中での位置づけ</p>
+            <p class="text-slate-600 mt-1"><strong>要点（自分）：</strong>講師は<strong>受講生データと講座規約</strong>、顧問は<strong>顧客の業務情報と作業範囲メモ（SOW）</strong>で線を引くと安心。<strong>要点（世の中）：</strong>会社のAI導入では<strong>サービス会社の「利用規約（約款）」と、発注側が求める条件</strong>のすり合わせが増え、経産省チェックリストが<strong>話の共通語</strong>になりうる。個人の受託は<strong>取適法・フリーランス新法</strong>の流れで<strong>条件を書面に残す</strong>のがより当たり前に（細目は公式と専門家へ）。</p>
+          </div>
+        </div>
+        <div class="rounded-xl border border-slate-200 p-4 flex flex-col sm:flex-row sm:items-start gap-3">
+          <span class="badge-essential flex-shrink-0">一歩</span>
+          <div>
+            <p class="font-bold text-slate-800">今日からの使い方</p>
+            <p class="text-slate-600 mt-1"><strong>要点：</strong>チェック1つ＝<strong>経産省PDFの目次を開き、「自分の案件で当てはまる見出しを3つ」メモする</strong>。次に<strong>個情報が入るなら個人情報保護委員会の注意喚起も一読</strong>（時点をメモ）。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="section-why-now">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="calendar-clock" class="w-8 h-8 text-violet-600"></i>
+        なぜ「今」、約束ごとを整理するのか
+      </h2>
+
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ぱにっくん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">ぱにっくん:</span><br>
+            <strong>ずっと前から契約は大事</strong>だったのに、なぜ<strong>いま改めて</strong>なんですか？
+          </p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4 mb-6">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ウパ博士">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">ウパ博士:</span><br>
+            公式の整理が<strong>「インプット／アウトプット」中心に揃い始めた</strong>のが大きいです。経済産業省は<strong>2025年2月18日</strong>に<strong>AIの利用・開発に関する契約チェックリスト</strong>をPDFで公表しています。また<strong>2026年1月1日</strong>から<strong>取適法</strong>が施行され、<strong>受託取引の見直し</strong>がニュースになりやすい時期です。古いブログ記事だけで「今も同じ」と決めつけないのが安全です。
+          </p>
+        </div>
+      </div>
+
+      <ul class="list-disc pl-6 text-slate-600 space-y-2 mb-4">
+        <li><strong>チェックリストの使い方（初心者向け）</strong>：条文を暗記するより、<strong>PDFの見出しを眺めて「自分の仕事で該当しそうな欄」</strong>にチェックマークを付ける、からで十分です。</li>
+        <li><strong>取適法・フリーランス新法</strong>：詳細は専門家に任せつつ、<strong>報酬・期日・業務内容を書面で残す</strong>ことが土台、と覚えておくとよいです。</li>
+      </ul>
+      <p class="text-xs text-slate-500">※ 契約条項の有効性や個別案件の適法性は、弁護士等の専門家と最新情報に依頼してください。</p>
+    </section>
+
+    <section class="section-card" id="section-in-out">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="arrow-left-right" class="w-8 h-8 text-violet-600"></i>
+        「入れる材料」と「出てくる成果」の流れだけ
+      </h2>
+
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ぱにっくん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">ぱにっくん:</span><br>
+            論点が多すぎて頭がパンクしそうです。<strong>順番</strong>だけ教えてください。
+          </p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4 mb-6">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ウパ博士">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">ウパ博士:</span><br>
+            多くの場合、<strong>先に「何をAIに入れていいか／だめか」</strong>、次に<strong>「出てきた成果を誰がどこまで使えるか」</strong>、そのあと<strong>「間違いや法令違反のリスクを、誰がどう減らすか」</strong>の順で話が進みます。経産省のチェックリストも、だいたいこの並びに寄せて整理されています。
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row items-stretch justify-center gap-2 md:gap-3 mb-4 text-sm text-slate-700">
+        <div class="rounded-lg border-2 border-violet-200 bg-white p-3 text-center flex-1">
+          <p class="font-bold text-violet-900">① 入れる材料</p>
+          <p class="text-slate-600 mt-1 text-xs">個人情報・秘密情報・学習利用の可否</p>
+        </div>
+        <div class="hidden md:flex items-center text-violet-400"><i data-lucide="arrow-right" class="w-6 h-6"></i></div>
+        <div class="flex md:hidden justify-center text-violet-400 py-1"><i data-lucide="arrow-down" class="w-6 h-6"></i></div>
+        <div class="rounded-lg border-2 border-rose-200 bg-white p-3 text-center flex-1">
+          <p class="font-bold text-rose-900">② AI・ツール</p>
+          <p class="text-slate-600 mt-1 text-xs">利用規約・設定・ログの扱い</p>
+        </div>
+        <div class="hidden md:flex items-center text-violet-400"><i data-lucide="arrow-right" class="w-6 h-6"></i></div>
+        <div class="flex md:hidden justify-center text-violet-400 py-1"><i data-lucide="arrow-down" class="w-6 h-6"></i></div>
+        <div class="rounded-lg border-2 border-slate-300 bg-white p-3 text-center flex-1">
+          <p class="font-bold text-slate-900">③ 出てくる成果</p>
+          <p class="text-slate-600 mt-1 text-xs">権利帰属・再利用・人による最終確認</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ぱにっくん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">ぱにっくん:</span><br>
+            図は追えました。<strong>ここで一旦確認</strong>ですが、覚えるのは<strong>「材料 → 道具 → 成果」</strong>の3つで合ってますか？
+          </p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4 mb-6">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ウパ博士">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">ウパ博士:</span><br>
+            はい、その3つで十分です。あとは<strong>各ステップで「誰が責任を持つか」</strong>を一言ずつ足すだけ、と割り切りましょう。
+          </p>
+        </div>
+      </div>
+
+      <p class="text-sm text-slate-600 mb-3"><strong>まず読むのはここだけ：</strong>下のチェックは<strong>コピペ用メモ</strong>です。時間がない日は<strong>上の3ブロックだけ</strong>でよいです。</p>
+
+      <details class="rounded-lg border border-slate-200 bg-slate-50 mb-2">
+        <summary class="cursor-pointer font-bold text-slate-800 p-4">自分用チェック項目（コピペ用・開く）</summary>
+        <div class="px-4 pb-4">
+          <div class="mb-4">
+            <div class="flex items-center gap-2 mb-2">
+              <i data-lucide="code" class="w-5 h-5 text-violet-600"></i>
+              <span class="font-bold text-slate-700">これがやること</span>
+            </div>
+            <p class="text-slate-600 ml-7 mb-2">
+              覚書やメールの下書きで、<span class="font-bold text-red-600">「決まっていないまま進めない」</span>ために、自分用の<strong>チェック項目のメモ</strong>として使える例です（条文の代わりではありません）。
+            </p>
+          </div>
+          <div class="code-block">
+            <pre><code>□ 入れる材料：個人情報・営業秘密は？ 保存期間は？
+□ 学習に使われる可能性：サービスの設定と約款で何と書いてある？
+□ 成果の著作権・利用範囲：クライアント用／自分のポートフォリオ用は？
+□ 正しさ：AIの限界を説明したか。人の最終確認は誰がする？
+□ 止めるとき：データ削除・エクスポート・代替手段は？</code></pre>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section class="section-card" id="section-advisor">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="users" class="w-8 h-8 text-violet-600"></i>
+        AI講師・顧問としての「使いどころ」
+      </h2>
+
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ぱにっくん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">ぱにっくん:</span><br>
+            これ、<strong>講座の募集ページ</strong>と<strong>顧問の提案書</strong>にどう載せればいいですか？　<strong>怖がらせすぎたくない</strong>です。
+          </p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4 mb-6">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ウパ博士">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">ウパ博士:</span><br>
+            多くの場合、<strong>「何をして安心になるか」</strong>より先に<strong>「何を約束しないか（AIの限界）」</strong>を短く書くと誤解が減ります。講座なら<strong>受講生データを課題例に使うか否か</strong>、顧問なら<strong>納品にAI下書きを含めるか・最終確認は誰か</strong>を、<strong>作業範囲メモ（SOW）</strong>に1段落足すイメージです。
+          </p>
+        </div>
+      </div>
+
+      <ul class="list-disc pl-6 text-slate-600 space-y-2 mb-4">
+        <li><strong>講師向け</strong>：説明会資料に<strong>「課題提出物はAI支援可／不可」</strong>と<strong>個人情報を載せない提出ルール</strong>を並べる。</li>
+        <li><strong>顧問向け</strong>：提案書に<strong>「業務フローに触れる情報の取り扱い」</strong>と<strong>成果物がAI生成を含む場合の開示</strong>を1項目追加する。</li>
+      </ul>
+
+      <details class="rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
+        <summary class="font-bold text-slate-800 cursor-pointer">もう少しだけ：個人情報と生成AI（注意喚起・2023年時点）</summary>
+        <p class="mt-2">個人情報保護委員会は<strong>2023年6月2日</strong>付で、生成AIサービス利用に関する注意喚起を公表しています。入力前に<strong>「載せていいデータか」</strong>を止めるクセが効きます。<strong>この分野は更新が続きやすい</strong>ので、使うときは<strong>公式ページに書かれた更新日</strong>を必ず確認してください（この図解は時点の目印にすぎません）。</p>
+      </details>
+    </section>
+
+    <section class="section-card" id="section-next">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="list-checks" class="w-8 h-8 text-violet-600"></i>
+        今日からの一歩（チェック）
+      </h2>
+
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ぱにっくん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">ぱにっくん:</span><br>
+            <strong>メモに残す一行</strong>、シンプルに欲しいです。
+          </p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4 mb-6">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ウパ博士">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">ウパ博士:</span><br>
+            コピペ用に2案あります。<strong>案A</strong>：「<strong>AIはデータが入り成果が出るだけの装置ではない。権利と責任の地図は契約で引く</strong>」。<strong>案B</strong>：「<strong>保証しないことと人が確認することを、見積もりと同じ粒度で書く</strong>」。
+          </p>
+        </div>
+      </div>
+
+      <div class="rounded-lg border-2 border-violet-300 bg-violet-50 p-4 text-slate-800 font-medium mb-4">
+        <span class="text-violet-900 font-bold">コピペ用ワンラインメモ：</span><br>
+        <strong>案A</strong> 「AIを挟む仕事は、材料・成果・保証・秘密の4つを覚書で地図にする。経産省のチェックリストで見出し合わせ。」<br>
+        <strong>案B</strong> 「正しさと法令は万能に保証しない前提を書き、最終確認の担当までセットで書く。」
+      </div>
+
+      <ul class="list-disc pl-6 text-slate-600 space-y-2">
+        <li>チェック1：<strong>経産省PDF</strong>を開き、<strong>該当しそうな見出しを3つ</strong>メモする。</li>
+        <li>チェック2：次に作る<strong>見積・提案書</strong>に<strong>作業範囲メモ（SOW）</strong>の欄を1つ足す。</li>
+        <li>チェック3：<strong>個人情報が絡む案件</strong>は、個情保委の注意喚起ページの<strong>公表日</strong>をブックマークにメモする。</li>
+      </ul>
+    </section>
+
+    <section class="section-card" id="section-summary">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="book-open" class="w-8 h-8 text-violet-600"></i>
+        まとめ
+      </h2>
+
+      <div class="rounded-lg border border-violet-200 bg-violet-50/90 p-4 mb-6 text-slate-700 text-sm space-y-2">
+        <p class="font-bold text-slate-800">このまとめで押さえる3点</p>
+        <ul class="list-disc pl-5 space-y-1 m-0">
+          <li><strong>一言：</strong>AIを挟んだ仕事では、<strong>入れる材料・出る成果・正しさの保証・秘密</strong>を、<strong>契約や覚書で地図のように引く</strong>のが今日のテーマ。</li>
+          <li><strong>自分の事業／広い文脈：</strong>講師は<strong>規約と研修契約</strong>、顧問は<strong>SOWと秘密保持</strong>が主戦場。世の中では<strong>経産省チェックリスト（2025-02-18）</strong>が共通語になり、<strong>取適法（2026-01〜）</strong>とあわせ<strong>受託の透明化</strong>が進む文脈。</li>
+          <li><strong>事業構築で外さないポイント：</strong>（1）インプットとアウトプットを分けて条項・メモの項目を洗う（2）保証の有無と人の最終確認の担当を曖昧にしない（3）学習利用・第三者提供をサービス約款と合わせて確認（4）報酬・期日・業務内容は書面の土台に（5）終了時のデータ扱いと代替手段を先に決める。</li>
+        </ul>
+      </div>
+
+      <div class="flex items-start gap-4 mb-6">
+        <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ぱにっくん">
+          <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble learner-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-learner">ぱにっくん:</span><br>
+            私の言葉だと、<strong>「AIを使うほど、材料と成果と責任の線を“地図”として書かないと後で揉める。経産省のチェックリストで見出し合わせして、自分の講座と顧問のテンプレに一行足す」</strong>、ですね。つまり、そういう理解で合ってますか？
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4">
+        <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ウパ博士">
+          <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
+        </div>
+        <div class="char-bubble guide-bubble flex-1">
+          <p class="text-lg">
+            <span class="font-bold label-navigator">ウパ博士:</span><br>
+            はい、その整理で十分です。<strong>1テーマだけ</strong>でも腹落ちすれば、細部は専門家と公式資料で拾えます。今日覚えるのはここまででよい、と割り切って大丈夫です。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="section-sources">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <i data-lucide="link" class="w-8 h-8 text-violet-600"></i>
+        出典一覧（確認用）
+      </h2>
+      <ul class="list-disc pl-6 text-slate-600 space-y-2 text-sm">
+        <li><a href="https://www.meti.go.jp/policy/mono_info_service/connected_industries/sharing_and_utilization/20250218003-ar.pdf" class="text-violet-700 hover:underline" target="_blank" rel="noopener noreferrer">経済産業省 — AIの利用・開発に関する契約チェックリスト（PDF、2025年2月18日公表）</a></li>
+        <li><a href="https://www.meti.go.jp/policy/mono_info_service/connected_industries/sharing_and_utilization.html" class="text-violet-700 hover:underline" target="_blank" rel="noopener noreferrer">経済産業省 — リアルデータの共有・利活用（親ページ。サイト上の更新日を確認）</a></li>
+        <li><a href="https://www.gov-online.go.jp/article/202511/entry-9983.html" class="text-violet-700 hover:underline" target="_blank" rel="noopener noreferrer">政府広報オンライン — 2026年1月から下請法が「取適法」に（記事パス上 2025年11月掲載）</a></li>
+        <li><a href="https://cms03.jftc.go.jp/partnership_package/toritekihou.html" class="text-violet-700 hover:underline" target="_blank" rel="noopener noreferrer">公正取引委員会 — 中小受託取引適正化法（取適法）関係（サイト表記の更新日を確認）</a></li>
+        <li><a href="https://gov-online.go.jp/article/202408/entry-6301.html" class="text-violet-700 hover:underline" target="_blank" rel="noopener noreferrer">政府広報オンライン — フリーランス新法（記事パス上 2024年8月掲載）</a></li>
+        <li><a href="https://www.ppc.go.jp/news/careful_information/230602_AI_utilize_alert" class="text-violet-700 hover:underline" target="_blank" rel="noopener noreferrer">個人情報保護委員会 — 生成AIサービスの利用に関する注意喚起等（2023年6月2日）</a></li>
+        <li><a href="https://atmarkit.itmedia.co.jp/ait/articles/2502/20/news093.html" class="text-violet-700 hover:underline" target="_blank" rel="noopener noreferrer">＠IT — 経産省「AI初心者向け契約チェックリスト」公開の紹介（2025年2月20日前後、一次PDFの補助理解用）</a></li>
+      </ul>
+      <p class="text-xs text-slate-500 mt-4">このページは学習・整理用です。契約条項の起草・法解釈・個別紛争の対応は、弁護士等の専門家と最新の法令・公式情報に依頼してください。</p>
+    </section>
+
+  </main>
+
+  <nav class="toc" aria-label="このページの目次">
+    <p class="text-sm font-bold text-slate-700 mb-2">目次</p>
+    <ul class="text-sm space-y-1 list-none m-0 p-0">
+      <li><a href="#section-dialogue-intro" class="text-violet-700 hover:underline">導入</a></li>
+      <li><a href="#section-map" class="text-violet-700 hover:underline">全体の地図</a></li>
+      <li><a href="#section-terms" class="text-violet-700 hover:underline">用語</a></li>
+      <li><a href="#section-three" class="text-violet-700 hover:underline">今日の3つの要点</a></li>
+      <li><a href="#section-why-now" class="text-violet-700 hover:underline">なぜ今か</a></li>
+      <li><a href="#section-in-out" class="text-violet-700 hover:underline">入る材料と出る成果</a></li>
+      <li><a href="#section-advisor" class="text-violet-700 hover:underline">講師・顧問での使いどころ</a></li>
+      <li><a href="#section-next" class="text-violet-700 hover:underline">今日からの一歩</a></li>
+      <li><a href="#section-summary" class="text-violet-700 hover:underline">まとめ</a></li>
+      <li><a href="#section-sources" class="text-violet-700 hover:underline">出典</a></li>
+    </ul>
+  </nav>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>
