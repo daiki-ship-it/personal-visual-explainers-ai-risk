@@ -19,7 +19,7 @@
 
 ### 構造・レイアウト（ページ全体の並び）
 
-**セクションの順序・各セクション内のブロック配置**（導入を1枚の `section-card` にまとめること、全体の地図のグリッドカード、用語を1セクションに縦積み、「この競合でまず押さえる3つ」のバッジ行、本編の `h2`→学習者→ナビゲーター→本文、まとめ、出典一覧＋免責、目次との `id` 対応など）は **[exemplar.md](exemplar.md) の「黄金見本」** の説明に従い、**具体マークアップの SSoT は [exemplar-layout.html](exemplar-layout.html)**（＋同階層 `images/`）。ブラウザで確認する場合は [exemplar-layout.html](exemplar-layout.html) を開くか、デプロイ済みスナップショットの URL は [exemplar.md](exemplar.md) の「黄金見本」表の **公開 URL（ブラウザ確認用）** を参照（アンカー例は同表に付記）。
+**セクションの順序・各セクション内のブロック配置**（導入を1枚の `section-card` にまとめること、全体の地図のグリッドカード、用語を1セクションに縦積み、**h2「今日の3つの要点」**のバッジ行、本編の `h2`→学習者→ナビゲーター→本文、まとめ、出典一覧＋免責、目次との `id` 対応など）は **[exemplar.md](exemplar.md) の「黄金見本」** の説明に従い、**具体マークアップの SSoT は [exemplar-layout.html](exemplar-layout.html)**（＋同階層 `images/`）。**見出し文言・地図ラベル・本編の論点・セクション数**の意味付けは [SKILL.md](../SKILL.md) の「読者・仕事・ゴール・『今日の3つの要点』の意味」と「本スキルと見本のズレ」が正（ここでは繰り返さない）。ブラウザで確認する場合は [exemplar-layout.html](exemplar-layout.html) を開くか、デプロイ済みスナップショットの URL は [exemplar.md](exemplar.md) の「黄金見本」表の **公開 URL（ブラウザ確認用）** を参照（未記入ならローカルでマスターを開く。アンカー例は同表に付記）。
 
 **本ファイル**は `<head>`・`body` のラッパー・共通 `<style>`（`:root`、`.section-card`、吹き出し、バッジ、`.toc` など）・`</main>` 直後の目次 `<nav>` の **DOM 位置とクラス名の定義** の SSoT である。`<main>` **内に何セクションをどの順で置くか、各セクションの中身の並べ方**は [exemplar-layout.html](exemplar-layout.html) に合わせる（テンプレートの `main` プレースホルダはあくまで最小例）。exemplar-layout に `<style>` が無いユーティリティ（例: `.code-block`）が必要なときは、本ファイルのテンプレートの定義をそのまま使う。
 

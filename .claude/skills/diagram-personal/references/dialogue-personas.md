@@ -1,6 +1,6 @@
 # 対話ペルソナ
 
-**SSoT**: 対話・ペルソナ・吹き出し／導入〜中間〜まとめの必須構造・**対話ブロックの骨格・配置・左枠のマークアップ型**の正はこのファイル。左枠の**既定**は**画像アバター**（学習者・ナビゲーターとも）。**ファイル名・ディレクトリ配置・デプロイ同梱**は [html-structure.md](html-structure.md) の **「対話左枠の画像アバター」** が正（ここでは繰り返さない）。**左枠の HTML 型**は下記 **「対話左枠の画像アバター（必須）」** を正とする。下表の **Lucide** は**対話左枠には使わず**、参照用 HTML 例（セリフ構造の見本）にのみ登場する。**ページ全体の Lucide／絵文字・対話以外の装飾**は [html-structure.md](html-structure.md) の SSoT に従う。`SKILL.md` はワークフローで各リファレンスへリンクする（**HTML/CSS のルール本文**は [html-structure.md](html-structure.md) に集約し、ここでは繰り返さない）。**読者・仕事・成功の定義**の正は `SKILL.md` の該当節。
+**SSoT**: 対話・ペルソナ・吹き出し／導入〜中間〜まとめの必須構造・**対話ブロックの骨格・配置・左枠のマークアップ型**の正はこのファイル。左枠の**既定**は**画像アバター**（学習者・ナビゲーターとも）。**ファイル名・ディレクトリ配置・デプロイ同梱**は [html-structure.md](html-structure.md) の **「対話左枠の画像アバター」** が正（ここでは繰り返さない）。**左枠の HTML 型**は下記 **「対話左枠の画像アバター（必須）」** を正とする。下表の **Lucide** は**対話左枠には使わず**、参照用 HTML 例（セリフ構造の見本）にのみ登場する。**ページ全体の Lucide／絵文字・対話以外の装飾**は [html-structure.md](html-structure.md) の SSoT に従う。`SKILL.md` はワークフローで各リファレンスへリンクする（**HTML/CSS のルール本文**は [html-structure.md](html-structure.md) に集約し、ここでは繰り返さない）。**読者・仕事・成功の定義・まとめ直後の必須3点（一言／個人と社会／講師・コンサル）**の正は `SKILL.md` の「読者・仕事・ゴール・『今日の3つの要点』の意味」節のみを正とする（ここでは繰り返さない）。
 
 ## 役割
 
@@ -14,14 +14,14 @@
 **学習者**
 
 - **仕様・説明・レビュー**では役割名 **「学習者」** を使う（本ファイルの見出し・表・チェックリスト、他リファレンスの構造説明と同じ）。
-- **HTML で読者に見える吹き出しの太字ラベル**は **`AIまいごん:`**（コロン付きで統一）。[exemplar-layout.html](exemplar-layout.html) のマークアップと同一の文字列を正とする。
-- **学習者左枠**の `aria-label` は **`AIまいごん`**（読み上げ用。役割語「学習者」はラベルには使わない）。詳細は [html-structure.md](html-structure.md) の「対話左枠の画像アバター」。
+- **HTML で読者に見える吹き出しの太字ラベル**は **`ぱにっくん:`**（コロン付きで統一）。[exemplar-layout.html](exemplar-layout.html) のマークアップと同一の文字列を正とする。
+- **学習者左枠**の `aria-label` は **`ぱにっくん`**（読み上げ用。役割語「学習者」はラベルには使わない）。詳細は [html-structure.md](html-structure.md) の「対話左枠の画像アバター」。
 
 **ナビゲーター**
 
 - **仕様・説明・レビュー**では役割名 **「ナビゲーター」** を使う（本ファイルの見出し・表・チェックリスト、他リファレンスの構造説明と同じ）。
-- **HTML で読者に見える吹き出しの太字ラベル**は **`AI博士ウパ:`**（コロン付きで統一）。[exemplar-layout.html](exemplar-layout.html) のマークアップと同一の文字列を正とする。
-- **ナビゲーター左枠**の `aria-label` は **`AI博士ウパ`**（読み上げ用。役割語「ナビゲーター」はラベルには使わない）。詳細は [html-structure.md](html-structure.md) の「対話左枠の画像アバター」。
+- **HTML で読者に見える吹き出しの太字ラベル**は **`ウパ博士:`**（コロン付きで統一）。[exemplar-layout.html](exemplar-layout.html) のマークアップと同一の文字列を正とする。
+- **ナビゲーター左枠**の `aria-label` は **`ウパ博士`**（読み上げ用。役割語「ナビゲーター」はラベルには使わない）。詳細は [html-structure.md](html-structure.md) の「対話左枠の画像アバター」。
 
 左枠のクラス・`alt` / `aria-label`・デプロイ同梱は [html-structure.md](html-structure.md) の **「対話左枠の画像アバター」**、マークアップの型は下記 **「対話左枠の画像アバター（必須）」**。吹き出しの色は **学習者＝紫系（`learner-bubble`）／ナビゲーター＝ローズ系（`guide-bubble`）** で役割を区別する（具体色は [html-structure.md](html-structure.md) 基本テンプレの `:root`）。
 
@@ -30,8 +30,8 @@
 ## 学習者のセリフの型
 
 - **正直に弱さを言う**: 「英語が続くと頭が真っ白になる」「この単語、3回出てきたがまだ怖い」
-- **自分の仕事に接続する質問**: 「講座の準備にどう関係する？」「顧問先では使わない話？」
-- **競合分析のとき（パーソナル図解の題材が競合1件のとき）**: 「文章が長すぎて頭から抜ける」「この会社は結局誰にいくらで何を売ってる？」「相手が強そうだと逆に動けない」「自分の価格と比べたらどう見える？」など、**一目で欲しい情報**に引っ張る質問を優先する。
+- **自分の仕事に接続する質問**: 「講座の準備にどう関係する？」「顧問先では使わない話？」「受講生に不安を煽らずにどう言う？」
+- **AIリスク整理のとき（パーソナル図解の既定題材）**: 「文章が長すぎて頭から抜ける」「それ、**個人の仕事**の話ですか **社会全体**の話ですか？」「**うちの講座で今日言える一言**は何？」「怖すぎて言えない／軽すぎて伝わらない、どこを狙う？」など、**一目で欲しい情報**と**伝え方**に引っ張る質問を優先する。
 - **確認**: 「つまり〇〇という理解で合ってる？」（**ページ内の最後の学習者吹き出し**に必ず1回。まとめブロックでは、下の HTML 例のとおり、自分の言葉での要約の**あと**に同じ吹き出しで続けてよい）
 
 避ける: わざとボケる、極端な自虐、用語をまねるだけで理解した気になる台詞。
@@ -64,8 +64,8 @@
   </div>
   <div class="char-bubble learner-bubble flex-1">
     <p class="text-lg">
-      <span class="font-bold label-learner">AIまいごん:</span><br>
-      公式ページ、長くて用語が連発で……正直、閉じそうになりました。一言でいうと何の話ですか？
+      <span class="font-bold label-learner">ぱにっくん:</span><br>
+      AIのリスク、一覧だと長くて頭から抜けます。<strong>今日は1テーマだけ</strong>に絞って、受講生に言える短さまで落としたいのですが……
     </p>
   </div>
 </div>
@@ -76,8 +76,8 @@
   </div>
   <div class="char-bubble guide-bubble flex-1">
     <p class="text-lg">
-      <span class="font-bold label-navigator">AI博士ウパ:</span><br>
-      大丈夫です。ここでいう主題は「<strong>〇〇を、決まった手順で安全に使うための約束事</strong>」です。地図から見ていきましょう。
+      <span class="font-bold label-navigator">ウパ博士:</span><br>
+      大丈夫です。いまのページは<strong>AIリスクを1テーマだけ</strong>掘り下げます。<strong>正体 → 起き方 → 守り方</strong>の<strong>短い地図（最大3ブロック）</strong>で追いかけましょう。
     </p>
   </div>
 </div>
@@ -91,25 +91,25 @@
 
 ```html
 <div class="flex items-start gap-4 mb-6">
-  <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AIまいごん">
+  <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ぱにっくん">
     <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
   </div>
   <div class="char-bubble learner-bubble flex-1">
     <p class="text-lg">
-      <span class="font-bold label-learner">AIまいごん:</span><br>
-      公式ページ、長くて用語が連発で……正直、閉じそうになりました。一言でいうと何の話ですか？
+      <span class="font-bold label-learner">ぱにっくん:</span><br>
+      AIのリスク、一覧だと長くて頭から抜けます。<strong>今日は1テーマだけ</strong>に絞って、受講生に言える短さまで落としたいのですが……
     </p>
   </div>
 </div>
 
 <div class="flex items-start gap-4 mb-6">
-  <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AI博士ウパ">
+  <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ウパ博士">
     <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
   </div>
   <div class="char-bubble guide-bubble flex-1">
     <p class="text-lg">
-      <span class="font-bold label-navigator">AI博士ウパ:</span><br>
-      大丈夫です。ここでいう主題は「<strong>〇〇を、決まった手順で安全に使うための約束事</strong>」です。地図から見ていきましょう。
+      <span class="font-bold label-navigator">ウパ博士:</span><br>
+      大丈夫です。いまのページは<strong>AIリスクを1テーマだけ</strong>掘り下げます。<strong>正体 → 起き方 → 守り方</strong>の<strong>短い地図（最大3ブロック）</strong>で追いかけましょう。
     </p>
   </div>
 </div>
@@ -124,7 +124,7 @@
 
 ### まとめ（自分の言葉・Lucide 左枠は参照用）
 
-**実装では左枠を画像に差し替える**（下の「まとめ（画像アバター）」と同じ左枠型）。
+**実装では左枠を画像に差し替える**（下の「まとめ（画像アバター）」と同じ左枠型）。**ページ上では**、[SKILL.md](../SKILL.md) の「まとめ（最終セクションの必須構成）」どおり、**（1）一言（2）個人と社会の影響（3）講師・コンサルの要点**を対話の前後の本文で明示する。学習者の最終吹き出しはそれらを**自分の言葉に言い換えた要約**＋「つまり合ってますか？」でよい。
 
 ```html
 <div class="flex items-start gap-4 mb-6">
@@ -133,7 +133,7 @@
   </div>
   <div class="char-bubble learner-bubble flex-1">
     <p class="text-lg">
-      <span class="font-bold label-learner">AIまいごん:</span><br>
+      <span class="font-bold label-learner">ぱにっくん:</span><br>
       なるほど。私の言葉だと、<strong>「△△は□□のための入り口で、最初に覚えるのは××だけでいい」</strong>、ですね。つまり、そういう理解で合ってますか？
     </p>
   </div>
@@ -146,24 +146,24 @@
 
 ```html
 <div class="flex items-start gap-4 mb-6">
-  <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AIまいごん">
+  <div class="learner-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ぱにっくん">
     <img src="images/learner.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
   </div>
   <div class="char-bubble learner-bubble flex-1">
     <p class="text-lg">
-      <span class="font-bold label-learner">AIまいごん:</span><br>
+      <span class="font-bold label-learner">ぱにっくん:</span><br>
       なるほど。私の言葉だと、<strong>「△△は□□のための入り口で、最初に覚えるのは××だけでいい」</strong>、ですね。つまり、そういう理解で合ってますか？
     </p>
   </div>
 </div>
 
 <div class="flex items-start gap-4">
-  <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="AI博士ウパ">
+  <div class="navigator-avatar w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden shadow-sm" role="img" aria-label="ウパ博士">
     <img src="images/navigator.png" alt="" class="w-full h-full object-cover" width="48" height="48" />
   </div>
   <div class="char-bubble guide-bubble flex-1">
     <p class="text-lg">
-      <span class="font-bold label-navigator">AI博士ウパ:</span><br>
+      <span class="font-bold label-navigator">ウパ博士:</span><br>
       はい、その整理で十分です。今日覚えるのはここまででよい、と割り切って大丈夫です。
     </p>
   </div>
